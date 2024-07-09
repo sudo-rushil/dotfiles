@@ -60,9 +60,18 @@
       "alignment": "right",
       "segments": [
         {
+          "type": "time",
+          "style": "plain",
+          "foreground": "p:lavender",
+          "template": "[{{ .CurrentDate | date .Format }}] ",
+          "properties": {
+            "time_format": "15:04:05.000"
+          }
+        },  
+        {
           "type": "sysinfo",
           "foreground": "p:pink",
-          "template": " {{ round .PhysicalPercentUsed .Precision }}% ",
+          "template": "{{ round .PhysicalPercentUsed .Precision }}% ",
           "properties": {
               "precision": 2
           },
