@@ -12,7 +12,7 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 call plug#end()
 
-colorscheme catppuccin_mocha
+colorscheme catppuccin_macchiato
 
 set tabstop=4
 set shiftwidth=4
