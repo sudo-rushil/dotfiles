@@ -2,6 +2,8 @@ set number
 set relativenumber
 set encoding=utf8
 
+set foldcolumn=2
+
 set termguicolors
 
 call plug#begin('~/.vim/plugged')
