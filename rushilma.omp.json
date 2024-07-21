@@ -104,10 +104,10 @@
           "template": "{{ if .Venv }}({{ .Venv }}){{ end }} "
         },
         {
+          "type": "text",
           "style": "plain",
           "foreground": "p:closer",
-          "template": "\uf105",
-          "type": "text"
+          "template": "\uf105"
         }
       ]
     }
