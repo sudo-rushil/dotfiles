@@ -14,9 +14,9 @@ call plug#end()
 
 colorscheme catppuccin_macchiato
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 
 set foldmethod=indent
