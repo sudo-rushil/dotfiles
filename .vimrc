@@ -26,3 +26,4 @@ set foldcolumn=3
 inoremap <M-Space> <C-n>
 
 set mouse=a
+filetype plugin indent on
