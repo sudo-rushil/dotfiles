@@ -49,7 +49,7 @@ type = "prompt"
     [blocks.segments.properties]
     home_icon = "~"
     style = "agnoster_short"
-    hide_root_location = true
+    hide_root_location = false
     max_depth = 3
 
   [[blocks.segments]]
@@ -77,6 +77,20 @@ alignment = "right"
 type = "prompt"
 
   [[blocks.segments]]
+  background = "p:base"
+  background_templates = [ "{{ if gt .Code 0 }}p:red{{ end }}" ]
+  foreground = "p:green"
+  foreground_templates = [ "{{ if gt .Code 0 }}p:base{{ end }}" ]
+  invert_powerline = true
+  powerline_symbol = ""
+  style = "powerline"
+  template = " {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}{{ end }} "
+  type = "status"
+
+    [blocks.segments.properties]
+    always_enabled = true
+
+  [[blocks.segments]]
   background = "p:peach"
   foreground = "p:crust"
   invert_powerline = true
@@ -93,20 +107,6 @@ type = "prompt"
   style = "powerline"
   template = "  "
   type = "root"
-
-  [[blocks.segments]]
-  background = "p:base"
-  background_templates = [ "{{ if gt .Code 0 }}p:red{{ end }}" ]
-  foreground = "p:green"
-  foreground_templates = [ "{{ if gt .Code 0 }}p:base{{ end }}" ]
-  invert_powerline = true
-  powerline_symbol = ""
-  style = "powerline"
-  template = " {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}{{ end }} "
-  type = "status"
-
-    [blocks.segments.properties]
-    always_enabled = true
 
   [[blocks.segments]]
   background = "p:text"
@@ -139,7 +139,7 @@ type = "rprompt"
   invert_powerline = true
   powerline_symbol = ""
   style = "powerline"
-  template = " {{ round .PhysicalPercentUsed .Precision}}%  "
+  template = " {{ round .PhysicalPercentUsed .Precision}}% \uefc5 "
   type = "sysinfo"
   
     [blocks.segments.properties]

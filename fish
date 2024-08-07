@@ -1,1 +1,0 @@
-/Users/rushilma/.config/fish
