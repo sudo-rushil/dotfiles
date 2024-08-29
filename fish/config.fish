@@ -5,7 +5,7 @@ if status is-interactive
     abbr --add l "ls -lah"
     abbr --add c "clear"
 
-    oh-my-posh init fish --config ~/.dotfiles/rushilma.omp.toml | source
+    oh-my-posh init fish --config ~/.config/rushilma.omp.toml | source
 end
 
 
