@@ -1,6 +1,4 @@
 -- load options and keymappings
-vim.g.have_nerd_font = true
-
 require("opt")
 
 -- load lazy.nvim
