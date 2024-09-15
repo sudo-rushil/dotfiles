@@ -102,8 +102,8 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
-alt-shift-l = 'focus-monitor next'
-alt-shift-h = 'focus-monitor prev'
+alt-shift-h = 'focus-monitor next'
+alt-shift-l = 'focus-monitor prev'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-cmd-h = 'move left'
