@@ -114,6 +114,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
@@ -127,10 +128,14 @@ return {
 						override_file_sorter = true,
 						case_mode = "smart_case",
 					},
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown(),
+					},
 				},
 			})
 
 			telescope.load_extension("fzf")
+			telescope.load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
 			-- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -389,6 +394,7 @@ return {
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -425,9 +431,9 @@ return {
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping.select_next_item(),
-					["<S-Tab>"] = cmp.mapping.select_prev_item(),
+					["<Tab>"] = cmp.mapping.confirm({ select = true }),
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
 
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display
@@ -493,6 +499,8 @@ return {
 			require("mini.diff").setup()
 
 			require("mini.icons").setup()
+
+			require("mini.tabline").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
