@@ -6,6 +6,8 @@ if status is-interactive
     abbr --add c "clear"
     abbr --add cat "bat"
 
+    fzf --fish | source
+
     oh-my-posh init fish --config ~/.config/rushilma.omp.toml | source
 end
 
