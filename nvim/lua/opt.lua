@@ -49,9 +49,9 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- wincmd
-vim.keymap.set("n", "<leader><leader>h", "<C-w><C-h>", { desc = "Move left" })
-vim.keymap.set("n", "<leader><leader>j", "<C-w><C-j>", { desc = "Move down" })
-vim.keymap.set("n", "<leader><leader>k", "<C-w><C-k>", { desc = "Move up" })
-vim.keymap.set("n", "<leader><leader>l", "<C-w><C-l>", { desc = "Move right" })
+vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move left" })
+vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move down" })
+vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move up" })
+vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move right" })
 
 -- vim: ts=2 sts=2 sw=2 et
