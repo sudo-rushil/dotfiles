@@ -283,6 +283,9 @@ return {
 			local servers = {
 				clangd = {},
 				marksman = {},
+				openscad_lsp = {
+					cmd = { "openscad-lsp", "--stdio", "--fmt-style=file" },
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -312,6 +315,32 @@ return {
 					end,
 				},
 			})
+
+			require("lspconfig").gdscript.setup({
+				name = "godot",
+				cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+			})
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-dap",
+		config = function()
+			local dap = require("dap")
+			dap.adapters.godot = {
+				type = "server",
+				host = "127.0.0.1",
+				port = 6006,
+			}
+			dap.configurations.gdscript = {
+				{
+					type = "godot",
+					request = "launch",
+					name = "Launch scene",
+					project = "${workspaceFolder}",
+					launch_scene = true,
+				},
+			}
 		end,
 	},
 
@@ -351,6 +380,7 @@ return {
 				lua = { "stylua" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
+				gdscript = { "gdformat" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -540,6 +570,7 @@ return {
 				"query",
 				"vim",
 				"vimdoc",
+				"gdscript",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
