@@ -293,6 +293,13 @@ return {
 						},
 					},
 				},
+				tinymist = {
+					settings = {
+						formatterMode = "typstyle",
+						-- exportPdf = "onSave",
+						semanticTokens = "enable",
+					},
+				},
 			}
 
 			require("mason").setup()
@@ -304,6 +311,8 @@ return {
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
+				ensure_installed = {},
+				automatic_installation = {},
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
@@ -318,7 +327,7 @@ return {
 
 			require("lspconfig").gdscript.setup({
 				name = "godot",
-				cmd = vim.lsp.rpc.connect("127.0.0.1", "6005"),
+				cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
 			})
 		end,
 	},
@@ -381,6 +390,7 @@ return {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				gdscript = { "gdformat" },
+				typst = { "typstyle" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
