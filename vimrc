@@ -20,7 +20,7 @@ set shiftwidth=4
 set expandtab
 
 set foldmethod=indent
-set foldcolumn=3
+" set foldcolumn=3
 
 " remap 
 inoremap <M-Space> <C-n>
