@@ -105,4 +105,4 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(oh-my-posh init zsh --config ~/.config/rushilma.omp.json)" 
+eval "$(oh-my-posh init zsh --config ~/.config/rushilma.omp.toml)" 

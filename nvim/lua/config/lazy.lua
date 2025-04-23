@@ -26,6 +26,7 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
+--[[
 -- Setup catppuccin.nvim
 require("catppuccin").setup({
 	background = {
@@ -34,6 +35,14 @@ require("catppuccin").setup({
 })
 
 vim.cmd.colorscheme("catppuccin")
+]]
+--
 
+require("rose-pine").setup({
+	variant = "moon", -- auto, main, moon, or dawn
+	dark_variant = "main", -- main, moon, or dawn
+})
+
+vim.cmd.colorscheme("rose-pine")
 
 -- vim: ts=2 sts=2 sw=2 et
