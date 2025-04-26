@@ -1,2 +1,5 @@
 *.swp
 spell/
+zsh/.zsh_plugins.zsh
+zsh/.zcompdump
+zsh/.zsh_history
