@@ -1,9 +1,4 @@
 HISTFILE=$HOME/.local/share/zsh/history
-#HISTSIZE=1000000
-#SAVEHIST=1000000
-
-# setopt appendhistory autocd extendedglob notify nomatch globdots
-# unsetopt beep
 
 #zstyle :compinstall filename "${ZDOTDIR:-$HOME}/.zshrc"
 #autoload -Uz compinit && compinit
