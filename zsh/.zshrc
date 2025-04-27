@@ -13,6 +13,10 @@ setopt autocd extendedglob notify
 # Set any zstyles you might use for configuration.
 [[ ! -f ${ZDOTDIR:-$HOME}/.zstyles ]] || source ${ZDOTDIR:-$HOME}/.zstyles
 
+# Activate homebrew
+# (( $+commands[brew] )) || return 1
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # Run antidote
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load
