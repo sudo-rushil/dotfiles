@@ -9,6 +9,9 @@ HISTFILE=$HOME/.local/share/zsh/history
 #autoload -Uz $ZFUNCDIR/*(.:t)
 
 setopt autocd extendedglob notify
+autoload zmv
+
+export EDITOR=nvim
 
 # Set any zstyles you might use for configuration.
 [[ ! -f ${ZDOTDIR:-$HOME}/.zstyles ]] || source ${ZDOTDIR:-$HOME}/.zstyles
@@ -35,3 +38,7 @@ autoload -Uz promptinit && promptinit && prompt pure
 PURE_PROMPT_SYMBOL="-"
 zstyle :prompt:pure:success white
 zstyle :prompt:pure:continuation magenta
+
+# magic enter
+zstyle :zshzoo:magic-enter command 'l .'
+zstyle :zshzoo:magic-enter git-command 'git status -sb .'

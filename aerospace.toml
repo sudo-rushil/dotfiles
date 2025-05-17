@@ -124,7 +124,6 @@ alt-shift-equal = 'resize smart +50'
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
 
 cmd-shift-h = 'workspace H' # workspace for hiding windows temporarily
 
@@ -132,7 +131,6 @@ cmd-shift-h = 'workspace H' # workspace for hiding windows temporarily
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
 cmd-h = 'move-node-to-workspace H'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
@@ -160,9 +158,8 @@ alt-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
 1 = 'q32g1wg4'
-2 = 'pb287q'
+2 = 'pb277'
 3 = 'built-in'
-4 = 'pb277'
 #1 = 'DELL U4323QE'
 #2 = 'built-in'
 H = 'main'
