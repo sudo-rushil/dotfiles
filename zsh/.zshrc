@@ -42,3 +42,8 @@ zstyle :prompt:pure:continuation magenta
 # magic enter
 zstyle :zshzoo:magic-enter command 'l .'
 zstyle :zshzoo:magic-enter git-command 'git status -sb .'
+
+# GPG
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
