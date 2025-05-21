@@ -41,7 +41,7 @@ vim.opt.inccommand = "split"
 -- keep 5 lines above/below cursor
 vim.opt.scrolloff = 5
 
-vim.keymap.set("n", "<leader>sp", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>sp", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", ":", ";")
 vim.keymap.set("n", ";", ":")
 
