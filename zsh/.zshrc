@@ -4,9 +4,9 @@ HISTFILE=$HOME/.local/share/zsh/history
 #autoload -Uz compinit && compinit
 
 # Lazy load Zsh function files from directory
-#ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
-#fpath=($ZFUNCDIR $fpath)
-#autoload -Uz $ZFUNCDIR/*(.:t)
+ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
+fpath=($ZFUNCDIR $fpath)
+autoload -Uz $ZFUNCDIR/*(.:t)
 
 setopt autocd extendedglob notify
 autoload zmv

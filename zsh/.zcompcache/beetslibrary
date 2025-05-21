@@ -1,0 +1,3 @@
+BEETS_LIBRARY='~/Music/library
+~/Music/musiclibrary.db'
+BEETS_CONFIG='/Users/rushilma/.config/beets/config.yaml'
