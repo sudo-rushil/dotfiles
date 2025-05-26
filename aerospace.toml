@@ -83,7 +83,25 @@ outer.right =      [{ monitor.builtin = 4 }, 8]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
+
 alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
+
+alt-f7 = 'exec-and-forget mpc prev'
+alt-f8 = 'exec-and-forget mpc toggle'
+alt-f9 = 'exec-and-forget mpc next'
+
+
+alt-o = "exec-and-forget mpc $(echo 'toggle\nprev\nnext' | choose -p toggle)"
+alt-p = "exec-and-forget cliclick kd:cmd t:v ku:cmd"
+# osascript -e 'tell application "System Events" to keystroke "v" using command down''''
+
+alt-cmd-space = '''exec-and-forget ls /Applications/ /Applications/Utilities/ /System/Applications/ /System/Applications/Utilities/ | \
+    grep '\.app$' | \
+    sed 's/\.app$//g' | \
+    choose | \
+    xargs -I {} open -a "{}.app"
+'''
+
 
 # alt-shift-enter = '''exec-and-forget osascript -e '
 # tell application "Arc"
@@ -91,9 +109,10 @@ alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
 #     activate
 # end tell'
 # '''
+
 alt-shift-enter = 'exec-and-forget firefox --new-instance'
 
-alt-shift-m = 'exec-and-forget ~/videos/ytplay.sh'
+#alt-shift-m = 'exec-and-forget ~/videos/ytplay.sh'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
