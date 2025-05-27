@@ -96,6 +96,11 @@ sketchybar --add item mpd e \
            --set mpd script="$PLUGIN_DIR/mpd.sh" \
            --set mpd click_script="mpc toggle"
 
+sketchybar --add item weather q \
+           --set weather update_freq=3600 \
+           --set weather script="$PLUGIN_DIR/weather.sh"
+           #--set weather click_script="mpc toggle"
+
           # --add alias "Control Center,WiFi"  right
 
 ##### Force all scripts to run the first time (never do this in a script) #####
