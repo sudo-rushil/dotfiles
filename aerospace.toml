@@ -84,11 +84,11 @@ outer.right =      [{ monitor.builtin = 4 }, 8]
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
 
-alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
+#alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
 
-alt-f7 = 'exec-and-forget mpc prev'
-alt-f8 = 'exec-and-forget mpc toggle'
-alt-f9 = 'exec-and-forget mpc next'
+#alt-f7 = 'exec-and-forget mpc prev'
+#alt-f8 = 'exec-and-forget mpc toggle'
+#alt-f9 = 'exec-and-forget mpc next'
 
 
 alt-o = "exec-and-forget mpc $(echo 'toggle\nprev\nnext' | choose -p toggle)"

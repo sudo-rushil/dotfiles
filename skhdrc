@@ -76,14 +76,18 @@
 # A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
 # ############################################################### #
 
-ralt - h : skhd -k "left"
-ralt - j : skhd -k "down"
-ralt - k : skhd -k "up"
-ralt - l : skhd -k "right"
-ralt - escape : skhd -k "backspace"
-lalt - return : kitty --single-instance ~
+lalt - return : kitty --single-instance --directory ~
 
 shift + lalt - m : kitty --single-instance ncmpcpp
+shift + lalt - n : kitty --single-instance newsboat
+shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose)" #kaomoji.sh
+shift + lalt - f : kitty --single-instance lf ~
+
+
+
+shift + cmd - l : kaomoji.sh | pbcopy && pbpaste
+# pbcopy < ~/.local/state/kaomoji
+
 
 
 # focus window

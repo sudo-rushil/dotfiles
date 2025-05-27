@@ -12,7 +12,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=30 blur_radius=30 color=0x40000000
+sketchybar --bar position=top height=30 blur_radius=30 color=0x10f4dbd6
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -27,8 +27,8 @@ default=(
   padding_right=5
   icon.font="MesloLGM Nerd Font:Bold:17.0"
   label.font="MesloLGM Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
+  icon.color=0xffb7bdf8 #c6a0f6 #0xffffffff
+  label.color=0xffb7bdf8 #c6a0f6 #0xffffffff
   icon.padding_left=2
   icon.padding_right=2
   label.padding_left=2
@@ -91,7 +91,7 @@ sketchybar --add item clock right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change
            
-sketchybar --add item mpd right \
+sketchybar --add item mpd e \
            --set mpd update_freq=2 \
            --set mpd script="$PLUGIN_DIR/mpd.sh" \
            --set mpd click_script="mpc toggle"
