@@ -3,6 +3,8 @@ HISTFILE=$HOME/.local/share/zsh/history
 #zstyle :compinstall filename "${ZDOTDIR:-$HOME}/.zshrc"
 #autoload -Uz compinit && compinit
 
+export XDG_CONFIG_HOME=~/.config
+
 # Lazy load Zsh function files from directory
 ZFUNCDIR=${ZDOTDIR:-$HOME}/.zfunctions
 fpath=($ZFUNCDIR $fpath)

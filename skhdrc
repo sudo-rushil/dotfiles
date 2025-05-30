@@ -76,17 +76,50 @@
 # A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
 # ############################################################### #
 
+# terminal
 lalt - return : kitty --single-instance --directory ~
+
+# browser
 shift + lalt - return : firefox --new-window
 
-shift + lalt - m : kitty --single-instance ncmpcpp
-shift + lalt - n : kitty --single-instance newsboat
-shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose)" 
-shift + lalt - f : kitty --single-instance lf ~
-shift + lalt - b : firefox --new-tab "$(choose < ~/bookmarks.txt | cut -d, -f2)"
+# music player
+lalt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
 
-shift + lalt - e : locale
-shift + lalt - l : (export LANG='en_US.UTF-8' && kaomoji.sh | pbcopy) && cliclick kd:cmd t:v ku:cmd
+:: default : sketchybar --trigger skhd_launch_mode_toggled MODE=off #; echo "default mode" # should notify sketchybar
+:: launch @ : sketchybar --trigger skhd_launch_mode_toggled MODE=on #; echo "launch mode" # should notify sketchybar
+
+shift - space ; launch 
+launch < escape ; default
+
+launch < m : skhd -k "escape"; kitty --single-instance ncmpcpp
+launch < n : skhd -k "escape"; kitty --single-instance newsboat
+launch < v : skhd -k "escape"; cd ~/videos/downloads && mpv "$(fd -e mkv | choose -z)" 
+launch < f : skhd -k "escape"; kitty --single-instance lf ~
+launch < b : skhd -k "escape"; bookmark.sh 
+launch < k : skhd -k "escape"; kaomoji.sh
+
+#shift + lalt - m : kitty --single-instance ncmpcpp
+
+# RSS reader
+#shift + lalt - n : kitty --single-instance newsboat
+
+# recent video downloads
+#shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose -z)" 
+
+# file manager
+#shift + lalt - f : kitty --single-instance lf ~
+
+# open bookmarks
+#shift + lalt - b : bookmark.sh # firefox --new-tab "$(choose < ~/.local/share/bookmarks.txt | cut -d, -f2)"
+
+#shift + lalt - b : firefox --new-tab "$(choose < ~/.local/share/bookmarks.txt | cut -d, -f2)"
+
+# paste kaomoji
+#shift + lalt - l : kaomoji.sh
+
+#(export LANG='en_US.UTF-8' && kaomoji.sh | pbcopy) && cliclick kd:cmd t:v ku:cmd
+
+cmd - space : cat ~/.local/share/applications.txt | choose -z | xargs -I{} open -a {}.app
 
 # pbcopy < ~/.local/state/kaomoji
 
@@ -96,26 +129,31 @@ lalt - 1 : yabai -m space --focus 1
 lalt - 2 : yabai -m space --focus 2
 lalt - 3 : yabai -m space --focus 3
 
+# Move to spaces
+shift + lalt - 1 : yabai -m window --space 1
+shift + lalt - 2 : yabai -m window --space 2
+shift + lalt - 3 : yabai -m window --space 3
+
 # Window navigation
 lalt - h : yabai -m window --focus west
 lalt - j : yabai -m window --focus south
 lalt - k : yabai -m window --focus north
 lalt - l : yabai -m window --focus east
 
-lalt - z : yabai -m window --toggle zoom-fullscreen
+# Echo kitty zoom/rotate functionality
+lalt - 0x2B : yabai -m window --toggle zoom-fullscreen
 lalt - w : yabai -m window --toggle split
 
+# Move window
+lalt + cmd - h : yabai -m window --swap west
+lalt + cmd - j : yabai -m window --swap south
+lalt + cmd - k : yabai -m window --swap north
+lalt + cmd - l : yabai -m window --swap east
 
-
-
-# focus window
-# alt - h : yabai -m window --focus west
-
-# swap managed window
-# shift + alt - h : yabai -m window --swap north
-
-# move managed window
-# shift + cmd - h : yabai -m window --warp east
+shift + lalt + cmd - h : yabai -m window --warp west
+shift + lalt + cmd - j : yabai -m window --warp south
+shift + lalt + cmd - k : yabai -m window --warp north
+shift + lalt + cmd - l : yabai -m window --warp east
 
 # balance size of windows
 # shift + alt - 0 : yabai -m space --balance
@@ -134,7 +172,6 @@ lalt - w : yabai -m window --toggle split
 
 # fast focus desktop
 # cmd + alt - x : yabai -m space --focus recent
-# cmd + alt - 1 : yabai -m space --focus 1
 
 # send window to desktop and follow focus
 # shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
@@ -162,13 +199,6 @@ lalt - w : yabai -m window --toggle split
 
 # set insertion point in focused container
 # ctrl + alt - h : yabai -m window --insert west
-
-# toggle window zoom
-# alt - d : yabai -m window --toggle zoom-parent
-# alt - f : yabai -m window --toggle zoom-fullscreen
-
-# toggle window split type
-# alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
 # alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
