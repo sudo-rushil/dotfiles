@@ -2,7 +2,7 @@
 
 # Copied from https://github.com/nguyenvulong/devenv-macos/blob/main/.config/sketchybar/plugins/weather.sh
 
-ENDPOINT='https://aviationweather.gov/api/data/metar?ids=KBOS&format=json&taf=false&hours=2'
+ENDPOINT='https://aviationweather.gov/api/data/metar?ids=KJFK&format=json&taf=false&hours=2'
 
 WEATHER_DATA=$(curl -s -m 5 ${ENDPOINT} | jq '.[] | select(.mostRecent == 1).rawOb' | tr -d '"')
 CURL_STATUS=$?

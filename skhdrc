@@ -77,15 +77,17 @@
 # ############################################################### #
 
 lalt - return : kitty --single-instance --directory ~
+shift + lalt - return : firefox --new-window
 
 shift + lalt - m : kitty --single-instance ncmpcpp
 shift + lalt - n : kitty --single-instance newsboat
-shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose)" #kaomoji.sh
+shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose)" 
 shift + lalt - f : kitty --single-instance lf ~
+shift + lalt - b : firefox --new-tab "$(choose < ~/bookmarks.txt | cut -d, -f2)"
 
+shift + lalt - e : locale
+shift + lalt - l : (export LANG='en_US.UTF-8' && kaomoji.sh | pbcopy) && cliclick kd:cmd t:v ku:cmd
 
-
-shift + cmd - l : kaomoji.sh | pbcopy && pbpaste
 # pbcopy < ~/.local/state/kaomoji
 
 ## Inspired by https://github.com/FelixKratz/dotfiles/blob/e6288b3f4220ca1ac64a68e60fced2d4c3e3e20b/.config/skhd/skhdrc
