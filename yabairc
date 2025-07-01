@@ -44,6 +44,9 @@ yabai -m config                                 \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
+yabai -m rule --add label="Messages" app="Messages" manage=off
+yabai -m rule --apply
+
 echo "yabai configuration loaded.."
 
 bordersopts=(

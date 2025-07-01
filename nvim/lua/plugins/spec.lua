@@ -301,6 +301,7 @@ return {
 						semanticTokens = "enable",
 					},
 				},
+				rust_analyzer = {},
 			}
 
 			require("mason").setup()
@@ -392,6 +393,7 @@ return {
 				cpp = { "clang-format" },
 				gdscript = { "gdformat" },
 				typst = { "typstyle" },
+				rust = { "rustfmt" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -583,6 +585,7 @@ return {
 				"typst",
 				"vim",
 				"vimdoc",
+				"rust",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
