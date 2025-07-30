@@ -131,25 +131,37 @@ shift + lalt - 3 : yabai -m window --space 3
 shift + lalt - 4 : yabai -m window --space 4
 
 # Window navigation
-lalt - h : yabai -m window --focus west
-lalt - j : yabai -m window --focus south
-lalt - k : yabai -m window --focus north
-lalt - l : yabai -m window --focus east
+lalt + cmd - h : yabai -m window --focus west
+lalt + cmd - j : yabai -m window --focus south
+lalt + cmd - k : yabai -m window --focus north
+lalt + cmd - l : yabai -m window --focus east
+
+launch < h : skhd -k "escape"; yabai -m space --focus prev
+launch < l : skhd -k "escape"; yabai -m space --focus next
+
+#lalt - l : yabai -m window --focus east 2>/dev/null && echo "yippee" >/dev/stderr && exit 1 \
+#            || echo "boo" >/dev/stderr \
+#            && index=$(($(yabai -m query --spaces | jq '.[] | select(."has-focus" == true) | .index') + 1)) \
+#            && echo ${index} >/dev/stderr \
+#            && yabai -m space --focus next \
+#            && (yabai -m window --focus west || true)
+
+
 
 # Echo kitty zoom/rotate functionality
 lalt - 0x2B : yabai -m window --toggle zoom-fullscreen
 lalt - w : yabai -m window --toggle split
 
 # Move window
-lalt + cmd - h : yabai -m window --swap west
-lalt + cmd - j : yabai -m window --swap south
-lalt + cmd - k : yabai -m window --swap north
-lalt + cmd - l : yabai -m window --swap east
+# lalt + cmd - h : yabai -m window --swap west
+# lalt + cmd - j : yabai -m window --swap south
+# lalt + cmd - k : yabai -m window --swap north
+# lalt + cmd - l : yabai -m window --swap east
 
-shift + lalt + cmd - h : yabai -m window --warp west
-shift + lalt + cmd - j : yabai -m window --warp south
-shift + lalt + cmd - k : yabai -m window --warp north
-shift + lalt + cmd - l : yabai -m window --warp east
+# shift + lalt + cmd - h : yabai -m window --warp west
+# shift + lalt + cmd - j : yabai -m window --warp south
+# shift + lalt + cmd - k : yabai -m window --warp north
+# shift + lalt + cmd - l : yabai -m window --warp east
 
 # balance size of windows
 # shift + alt - 0 : yabai -m space --balance
