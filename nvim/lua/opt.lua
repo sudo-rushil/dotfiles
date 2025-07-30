@@ -4,7 +4,7 @@
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
@@ -54,5 +54,9 @@ vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move left" })
 vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move down" })
 vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move up" })
 vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move right" })
+
+-- diagnostics (redundant with d] d[?)
+-- vim.api.nvim_set_keymap("n", "<leader>d[", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>d]", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
 
 -- vim: ts=2 sts=2 sw=2 et

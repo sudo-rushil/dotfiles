@@ -302,6 +302,22 @@ return {
 					},
 				},
 				rust_analyzer = {},
+				pylsp = {
+					plugins = {
+						ruff = {
+							enabled = true,
+							lineLength = 88,
+						},
+					},
+				},
+				ruff = {
+					init_options = {
+						settings = {
+							logLevel = "debug",
+						},
+					},
+				},
+				uv = {},
 			}
 
 			require("mason").setup()
@@ -394,6 +410,14 @@ return {
 				gdscript = { "gdformat" },
 				typst = { "typstyle" },
 				rust = { "rustfmt" },
+				python = {
+					"ruff_fix",
+					"ruff_format",
+					"ruff_organize_imports",
+				},
+				clojure = {
+					"zprint",
+				},
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -544,6 +568,24 @@ return {
 
 			require("mini.icons").setup()
 
+			require("mini.indentscope").setup()
+
+			require("mini.pairs").setup({
+				mappings = {
+					["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]." },
+					["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]." },
+					["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]." },
+
+					[")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+					["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+					["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
+
+					['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+					["'"] = false, -- { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
+					["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
+				},
+			})
+
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
 			--  and try some other statusline plugin
@@ -586,6 +628,8 @@ return {
 				"vim",
 				"vimdoc",
 				"rust",
+				"python",
+				"clojure",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
@@ -593,6 +637,41 @@ return {
 				enable = true,
 			},
 			indent = { enable = true },
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["af"] = { query = "@function.outer", desc = "Select outer function" },
+						["if"] = { query = "@function.inner", desc = "Select inner function" },
+						["ac"] = { query = "@class.outer", desc = "Select outer class" },
+						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+						["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+					},
+
+					-- selection_modes = { ["@function.outer"] = "V", -- linewise },
+				},
+				move = {
+					enable = true,
+					goto_next_start = {
+						["]f"] = "@function.outer",
+						["]c"] = "@class.outer",
+						["]a"] = "@parameter.inner",
+					},
+					goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+					goto_previous_start = {
+						["[f"] = "@function.outer",
+						["[c"] = "@class.outer",
+						["[a"] = "@parameter.inner",
+					},
+					goto_previous_end = {
+						["[F"] = "@function.outer",
+						["[C"] = "@class.outer",
+						["[A"] = "@parameter.inner",
+					},
+				},
+			},
 		},
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -601,6 +680,8 @@ return {
 		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
+
+	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 
 	{
 		"chomosuke/typst-preview.nvim",
@@ -652,6 +733,65 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 		lazy = false,
+	},
+
+	-- Lazy
+	{
+		"dgagn/diagflow.nvim",
+		event = "LspAttach", -- This is what I use personnally and it works great
+		opts = {},
+	},
+
+	{
+		"Olical/conjure",
+		ft = { "clojure", "python" }, -- etc
+		lazy = true,
+		init = function()
+			-- Set configuration options here
+			-- Uncomment this to get verbose logging to help diagnose internal Conjure issues
+			-- This is VERY helpful when reporting an issue with the project
+			-- vim.g["conjure#debug"] = true
+		end,
+
+		-- Optional cmp-conjure integration
+		dependencies = { "PaterJason/cmp-conjure" },
+	},
+	{
+		"PaterJason/cmp-conjure",
+		lazy = true,
+		config = function()
+			local cmp = require("cmp")
+			local config = cmp.get_config()
+			table.insert(config.sources, { name = "conjure" })
+			return cmp.setup(config)
+		end,
+	},
+
+	{
+		"julienvincent/nvim-paredit",
+		lazy = true,
+		ft = { "clojure" },
+		config = function()
+			local paredit = require("nvim-paredit")
+			paredit.setup({
+				indent = {
+					enabled = true,
+				},
+				keys = {
+					[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+					[">("] = { paredit.api.barf_backwards, "Barf backwards" },
+
+					["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
+					["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
+				},
+			})
+		end,
+	},
+
+	{
+		"clojure-vim/vim-jack-in",
+		ft = { "clojure" },
+		dependencies = { "tpope/vim-dispatch" },
 	},
 }
 -- modeline
