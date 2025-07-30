@@ -1,0 +1,11 @@
+add-highlighter global/ number-lines -relative -hlcursor
+
+colorscheme rose-pine-moon
+
+hello
+
+How
+tty-cmd{"ok": false, "error": "Remote control is disabled"}u
+world
+
+
