@@ -1,5 +1,5 @@
 evaluate-commands %sh{
-    
+
 base=rgb:232136
 surface=rgb:2a273f
 overlay=rgb:393552
@@ -16,7 +16,7 @@ highlight=rgb:312f44
 highlightInactive=rgb:2a283d
 highlightOverlay=rgb:3f3c53
 
-    
+
 ## code
 echo "
     face global value ${iris}

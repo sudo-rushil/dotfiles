@@ -5,7 +5,6 @@ colorscheme rose-pine-moon
 set-option global tabstop 4
 set-option global indentwidth 4
 
-
 # Line numbers
 add-highlighter global/ number-lines -relative -hlcursor
 
@@ -51,6 +50,37 @@ hook global InsertCompletionShow .* %{
   }
 }
 
+# Cursor Color in Insert Mode
+# TODO: change to use colorscheme-native colors
+
+# Shades of blue/cyan for normal mode
+set-face global PrimarySelection black,cyan+F
+set-face global SecondarySelection black,blue+F
+set-face global PrimaryCursor black,bright-cyan+F
+set-face global SecondaryCursor black,bright-blue+F
+set-face global PrimaryCursorEol black,bright-cyan
+set-face global SecondaryCursorEol black,bright-blue
+
+# Shades of green/yellow for insert mode.
+hook global ModeChange (push|pop):.*:insert %{
+    set-face window PrimarySelection black,yellow+F
+    set-face window SecondarySelection black,green+F
+    set-face window PrimaryCursor black,bright-yellow+F
+    set-face window SecondaryCursor black,bright-green+F
+    set-face window PrimaryCursorEol black,bright-yellow
+    set-face window SecondaryCursorEol black,bright-green
+}
+
+# Undo colour changes when we leave insert mode.
+hook global ModeChange (push|pop):insert:.* %{
+    unset-face window PrimarySelection
+    unset-face window SecondarySelection
+    unset-face window PrimaryCursor
+    unset-face window SecondaryCursor
+    unset-face window PrimaryCursorEol
+    unset-face window SecondaryCursorEol
+}
+
 ### Plugins
 
 # Ensure plug.kak is installed and loaded
@@ -62,3 +92,34 @@ evaluate-commands %sh{
     printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
 }
 plug "andreyorst/plug.kak" noload
+
+# fzf
+plug "andreyorst/fzf.kak" config %{
+    require-module fzf
+    require-module fzf-grep
+    require-module fzf-file
+} defer fzf %{
+    set-option global fzf_highlight_command "bat -r {}"
+} defer fzf-file %{
+    set-option global fzf_file_command "fd . --no-ignore-vcs"
+} defer fzf-grep %{
+    set-option global fzf_grep_command "rg"
+}
+
+map -docstring "open fzf" global user f ": fzf-mode<ret>"
+
+plug "gustavo-hms/luar" %{
+    require-module luar
+}
+
+plug "gustavo-hms/peneira" %{
+    require-module peneira
+}
+
+define-command peneira-buffers %{
+    peneira 'buffers: ' %{ eval "printf '%s\n' $kak_quoted_buflist" } %{
+        buffer %arg{1}
+    }
+}
+
+map -docstring "open peneira buffers" global user b ": peneira-buffers<ret>"
