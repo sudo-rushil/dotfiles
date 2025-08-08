@@ -6,7 +6,7 @@ set-option global tabstop 4
 set-option global indentwidth 4
 
 # Line numbers
-add-highlighter global/ number-lines -relative -hlcursor
+add-highlighter global/ number-lines -relative -hlcursor -separator '  '
 
 # Matching braces
 add-highlighter global/ show-matching
@@ -21,7 +21,10 @@ add-highlighter global/ wrap -word -indent
 map global normal <esc> ";,"
 
 # Comment lines
-map global normal <c-v> ":comment-line<ret>"
+map global normal '#' ":comment-line<ret>"
+
+# Evaluate math (from mawww's config)
+map global normal = ':prompt math: %{exec "a%val{text}<lt>esc>|bc<lt>ret>"}<ret>'
 
 # Go through buffers with <space>m/n
 map -docstring "goto previous buffer" global user n ": bp<ret>"
@@ -94,19 +97,35 @@ evaluate-commands %sh{
 plug "andreyorst/plug.kak" noload
 
 # fzf
-plug "andreyorst/fzf.kak" config %{
-    require-module fzf
-    require-module fzf-grep
-    require-module fzf-file
-} defer fzf %{
-    set-option global fzf_highlight_command "bat -r {}"
-} defer fzf-file %{
-    set-option global fzf_file_command "fd . --no-ignore-vcs"
-} defer fzf-grep %{
-    set-option global fzf_grep_command "rg"
+# plug "andreyorst/fzf.kak" config %{
+#     require-module fzf
+#     require-module fzf-grep
+#     require-module fzf-file
+# } defer fzf %{
+#     set-option global fzf_highlight_command "bat -r {}"
+# } defer fzf-file %{
+#     set-option global fzf_file_command "fd . --no-ignore-vcs"
+# } defer fzf-grep %{
+#     set-option global fzf_grep_command "rg"
+# }
+
+# map -docstring "open fzf" global user f ": fzf-mode<ret>"
+
+# powerline
+plug "andreyorst/powerline.kak" defer powerline_palenight %{
+    powerline-theme palenight
+} defer powerline %{
+	powerline-format global "mode_info git bufname filetype line_column position"
+	set-option global powerline_separator_thin ""
+	set-option global powerline_separator ""
+} config %{
+	powerline-start
 }
 
-map -docstring "open fzf" global user f ": fzf-mode<ret>"
+plug 'delapouite/kakoune-mirror' %{
+# Suggested mapping
+  map global normal "'" ': enter-user-mode -lock mirror<ret>'
+}
 
 plug "gustavo-hms/luar" %{
     require-module luar
@@ -123,3 +142,17 @@ define-command peneira-buffers %{
 }
 
 map -docstring "open peneira buffers" global user b ": peneira-buffers<ret>"
+
+# Buffer management
+plug 'delapouite/kakoune-buffers' %{
+    # use qwe for navigation, and b for buffers
+    map global normal ^ q
+    map global normal <a-^> Q
+    map global normal q b
+    map global normal Q B
+    map global normal <a-q> <a-b>
+    map global normal <a-Q> <a-B>
+    map global normal b ': enter-buffers-mode<ret>' -docstring 'buffers'
+    map global normal B ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
+}
+
