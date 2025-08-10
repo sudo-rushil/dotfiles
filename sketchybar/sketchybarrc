@@ -25,10 +25,10 @@ sketchybar --bar position=top height=30 blur_radius=30 color=0x10f4dbd6
 default=(
   padding_left=5
   padding_right=5
-  icon.font="MesloLGM Nerd Font:Bold:17.0"
-  label.font="MesloLGM Nerd Font:Bold:14.0"
-  icon.color=0xffb7bdf8 #c6a0f6 #0xffffffff
-  label.color=0xffb7bdf8 #c6a0f6 #0xffffffff
+  icon.font="MesloLGM Nerd Font:Bold Italic:17.0"
+  label.font="MesloLGM Nerd Font:Bold Italic:14.0"
+  icon.color=0xdf24273a #c6a0f6 #0xffffffff
+  label.color=0xdf24273a # 0x88b7bdf8 #c6a0f6 #0xffffffff
   icon.padding_left=2
   icon.padding_right=2
   label.padding_left=2
