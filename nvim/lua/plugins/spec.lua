@@ -418,6 +418,9 @@ return {
 				clojure = {
 					"zprint",
 				},
+				v = {
+					"v",
+				},
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -580,9 +583,9 @@ return {
 					["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
 					["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
 
-					['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
-					["'"] = false, -- { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
-					["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
+					--['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^\\].", register = { cr = false } },
+					--["'"] = false, -- { action = "closeopen", pair = "''", neigh_pattern = "[^%a\\].", register = { cr = false } },
+					--["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\].", register = { cr = false } },
 				},
 			})
 
@@ -742,57 +745,57 @@ return {
 		opts = {},
 	},
 
-	{
-		"Olical/conjure",
-		ft = { "clojure", "python" }, -- etc
-		lazy = true,
-		init = function()
-			-- Set configuration options here
-			-- Uncomment this to get verbose logging to help diagnose internal Conjure issues
-			-- This is VERY helpful when reporting an issue with the project
-			-- vim.g["conjure#debug"] = true
-		end,
-
-		-- Optional cmp-conjure integration
-		dependencies = { "PaterJason/cmp-conjure" },
-	},
-	{
-		"PaterJason/cmp-conjure",
-		lazy = true,
-		config = function()
-			local cmp = require("cmp")
-			local config = cmp.get_config()
-			table.insert(config.sources, { name = "conjure" })
-			return cmp.setup(config)
-		end,
-	},
-
-	{
-		"julienvincent/nvim-paredit",
-		lazy = true,
-		ft = { "clojure" },
-		config = function()
-			local paredit = require("nvim-paredit")
-			paredit.setup({
-				indent = {
-					enabled = true,
-				},
-				keys = {
-					[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
-					[">("] = { paredit.api.barf_backwards, "Barf backwards" },
-
-					["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
-					["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
-				},
-			})
-		end,
-	},
-
-	{
-		"clojure-vim/vim-jack-in",
-		ft = { "clojure" },
-		dependencies = { "tpope/vim-dispatch" },
-	},
+	-- {
+	-- 	"Olical/conjure",
+	-- 	ft = { "clojure", "python" }, -- etc
+	-- 	lazy = true,
+	-- 	init = function()
+	-- 		-- Set configuration options here
+	-- 		-- Uncomment this to get verbose logging to help diagnose internal Conjure issues
+	-- 		-- This is VERY helpful when reporting an issue with the project
+	-- 		-- vim.g["conjure#debug"] = true
+	-- 	end,
+	--
+	-- 	-- Optional cmp-conjure integration
+	-- 	dependencies = { "PaterJason/cmp-conjure" },
+	-- },
+	-- {
+	-- 	"PaterJason/cmp-conjure",
+	-- 	lazy = true,
+	-- 	config = function()
+	-- 		local cmp = require("cmp")
+	-- 		local config = cmp.get_config()
+	-- 		table.insert(config.sources, { name = "conjure" })
+	-- 		return cmp.setup(config)
+	-- 	end,
+	-- },
+	--
+	-- {
+	-- 	"julienvincent/nvim-paredit",
+	-- 	lazy = true,
+	-- 	ft = { "clojure" },
+	-- 	config = function()
+	-- 		local paredit = require("nvim-paredit")
+	-- 		paredit.setup({
+	-- 			indent = {
+	-- 				enabled = true,
+	-- 			},
+	-- 			keys = {
+	-- 				[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+	-- 				[">("] = { paredit.api.barf_backwards, "Barf backwards" },
+	--
+	-- 				["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
+	-- 				["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+	--
+	-- {
+	-- 	"clojure-vim/vim-jack-in",
+	-- 	ft = { "clojure" },
+	-- 	dependencies = { "tpope/vim-dispatch" },
+	-- },
 }
 -- modeline
 -- vim: ts=2 sts=2 sw=2 et
