@@ -418,9 +418,8 @@ return {
 				clojure = {
 					"zprint",
 				},
-				v = {
-					"v",
-				},
+				v = { "v" },
+				go = { "gofmt" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -633,6 +632,8 @@ return {
 				"rust",
 				"python",
 				"clojure",
+				"v",
+				"go",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,

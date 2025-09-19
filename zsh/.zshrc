@@ -21,6 +21,8 @@ export EDITOR=nvim
 # Activate homebrew
 # (( $+commands[brew] )) || return 1
 eval $(/opt/homebrew/bin/brew shellenv)
+autoload -Uz compinit
+compinit
 
 # Run antidote
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
@@ -51,7 +53,10 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-
-
+# Clojure support
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export JAVA_HOME="/opt/homebrew/Cellar/openjdk/24.0.1"
+
+# Emacs support
+export PATH="$HOME/.emacs.d/bin:$PATH"
+export DOOMDIR="$HOME/.dotfiles/doom"
