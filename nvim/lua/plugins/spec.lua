@@ -3,20 +3,6 @@ return {
 	-- { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
 	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
 
-	-- markdown previewer
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.cmd([[Lazy load markdown-preview.nvim]])
-			vim.fn["mkdp#util#install"]()
-		end,
-		keys = {
-			{ "<leader>md", "<cmd>MarkdownPreviewToggle<cr>", ft = "markdown", desc = "Markdown Toggle" },
-		},
-	},
-
 	-- kickstart.nvim inspired:
 	-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L188
 
@@ -283,10 +269,6 @@ return {
 
 			local servers = {
 				clangd = {},
-				marksman = {},
-				openscad_lsp = {
-					cmd = { "openscad-lsp", "--stdio", "--fmt-style=file" },
-				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -302,22 +284,6 @@ return {
 					},
 				},
 				rust_analyzer = {},
-				pylsp = {
-					plugins = {
-						ruff = {
-							enabled = true,
-							lineLength = 88,
-						},
-					},
-				},
-				ruff = {
-					init_options = {
-						settings = {
-							logLevel = "debug",
-						},
-					},
-				},
-				uv = {},
 			}
 
 			require("mason").setup()
@@ -342,32 +308,6 @@ return {
 					end,
 				},
 			})
-
-			require("lspconfig").gdscript.setup({
-				name = "godot",
-				cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-			})
-		end,
-	},
-
-	{
-		"mfussenegger/nvim-dap",
-		config = function()
-			local dap = require("dap")
-			dap.adapters.godot = {
-				type = "server",
-				host = "127.0.0.1",
-				port = 6006,
-			}
-			dap.configurations.gdscript = {
-				{
-					type = "godot",
-					request = "launch",
-					name = "Launch scene",
-					project = "${workspaceFolder}",
-					launch_scene = true,
-				},
-			}
 		end,
 	},
 
@@ -410,14 +350,6 @@ return {
 				gdscript = { "gdformat" },
 				typst = { "typstyle" },
 				rust = { "rustfmt" },
-				python = {
-					"ruff_fix",
-					"ruff_format",
-					"ruff_organize_imports",
-				},
-				clojure = {
-					"zprint",
-				},
 				v = { "v" },
 				go = { "gofmt" },
 				-- Conform can also run multiple formatters sequentially
@@ -433,32 +365,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			{
-				"L3MON4D3/LuaSnip",
-				build = (function()
-					-- Build Step is needed for regex support in snippets.
-					-- This step is not supported in many windows environments.
-					-- Remove the below condition to re-enable on windows.
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					-- `friendly-snippets` contains a variety of premade snippets.
-					--    See the README about individual language/framework/plugin snippets:
-					--    https://github.com/rafamadriz/friendly-snippets
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-				},
-			},
-			"saadparwaiz1/cmp_luasnip",
-
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
@@ -469,15 +375,8 @@ return {
 		config = function()
 			-- See `:help cmp`
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			luasnip.config.setup({})
 
 			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
 				completion = { completeopt = "menu,menuone,noinsert" },
 
 				-- For an understanding of why these mappings were
@@ -509,28 +408,6 @@ return {
 					--  Generally you don't need this, because nvim-cmp will display
 					--  completions whenever it has completion options available.
 					["<C-Space>"] = cmp.mapping.complete({}),
-
-					-- Think of <c-l> as moving to the right of your snippet expansion.
-					--  So if you have a snippet that's like:
-					--  function $name($args)
-					--    $body
-					--  end
-					--
-					-- <c-l> will move you to the right of each of the expansion locations.
-					-- <c-h> is similar, except moving you backwards.
-					["<C-l>"] = cmp.mapping(function()
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						end
-					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function()
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						end
-					end, { "i", "s" }),
-
-					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}),
 				sources = {
 					{
@@ -539,7 +416,6 @@ return {
 						group_index = 0,
 					},
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 					{ name = "path" },
 					{ name = "buffer" },
 				},
@@ -706,28 +582,6 @@ return {
 	}, -- not strictly required, but recommended
 
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		version = "*",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-		},
-		cmd = "Neotree",
-		keys = {
-			{ "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
-		},
-		opts = {
-			filesystem = {
-				window = {
-					mappings = {
-						["\\"] = "close_window",
-					},
-				},
-			},
-		},
-	},
-
-	{
 		"stevearc/oil.nvim",
 		--- @module 'oil'
 		--- @type oil.SetupOpts
@@ -771,32 +625,26 @@ return {
 	-- 	end,
 	-- },
 	--
-	-- {
-	-- 	"julienvincent/nvim-paredit",
-	-- 	lazy = true,
-	-- 	ft = { "clojure" },
-	-- 	config = function()
-	-- 		local paredit = require("nvim-paredit")
-	-- 		paredit.setup({
-	-- 			indent = {
-	-- 				enabled = true,
-	-- 			},
-	-- 			keys = {
-	-- 				[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
-	-- 				[">("] = { paredit.api.barf_backwards, "Barf backwards" },
-	--
-	-- 				["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
-	-- 				["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
-	--
-	-- {
-	-- 	"clojure-vim/vim-jack-in",
-	-- 	ft = { "clojure" },
-	-- 	dependencies = { "tpope/vim-dispatch" },
-	-- },
+	{
+		"julienvincent/nvim-paredit",
+		lazy = true,
+		ft = { "clojure", "fennel", "hy" },
+		config = function()
+			local paredit = require("nvim-paredit")
+			paredit.setup({
+				indent = {
+					enabled = true,
+				},
+				keys = {
+					[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+					[">("] = { paredit.api.barf_backwards, "Barf backwards" },
+
+					["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
+					["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
+				},
+			})
+		end,
+	},
 }
 -- modeline
 -- vim: ts=2 sts=2 sw=2 et
