@@ -334,7 +334,8 @@ return {
 				local disable_filetypes = { c = true, cpp = true }
 				local lsp_format_opt
 				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
+					return nil
+					-- lsp_format_opt = "never"
 				else
 					lsp_format_opt = "fallback"
 				end
@@ -644,6 +645,37 @@ return {
 				},
 			})
 		end,
+	},
+
+	{
+		"milanglacier/yarepl.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>rs", "<Plug>(REPLStart-ipython)", noremap = true, ft = "python", mode = "n" },
+			{ "<leader>rr", "<Plug>(REPLSendLine)j", noremap = true, mode = "n" },
+			{ "<leader>rr", "<Plug>(REPLSourceVisual)", noremap = true, mode = "v" },
+			{ "<leader>rq", "<Plug>(REPLStart-ipython)", noremap = true, ft = "python", mode = "n" },
+		},
+
+		opts = {
+			ft = "ipython",
+			wincmd = "belowright 14 split",
+			metas = {
+				aichat = false,
+				radian = false,
+				R = false,
+				bash = false,
+				ipython = {
+					cmd = "uv run ipython", -- add it with `uv add --dev ipython`
+					formatter = "bracketed_pasting",
+					source_syntax = "ipython",
+				},
+			},
+			source_command_hint = {
+				enabled = false,
+				hl_group = "Comment",
+			},
+		},
 	},
 }
 -- modeline

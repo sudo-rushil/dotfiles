@@ -48,7 +48,7 @@ vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 --vim.keymap.set("n", ";", ":")
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- wincmd
 vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move left" })
