@@ -60,3 +60,7 @@ export JAVA_HOME="/opt/homebrew/Cellar/openjdk/24.0.1"
 # Emacs support
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export DOOMDIR="$HOME/.dotfiles/doom"
+
+# LLVM support
+export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
+export PATH="$PATH:$(brew --prefix)/opt/riscv-gnu-toolchain/bin"

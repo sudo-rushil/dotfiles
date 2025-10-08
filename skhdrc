@@ -86,8 +86,11 @@ launch < v : skhd -k "escape"; cd ~/videos/downloads && mpv "$(fd -e mkv | choos
 launch < f : skhd -k "escape"; kitty --single-instance lf ~
 launch < b : skhd -k "escape"; bookmark.sh 
 launch < k : skhd -k "escape"; kaomoji.sh
-launch < s : skhd -k "escape"; save_bookmark.sh
+#launch < s : skhd -k "escape"; save_bookmark.sh
 launch < a : skhd -k "escape"; kitty --single-instance; cliclick t:aerc kp:return
+launch < s : skhd -k "escape"; open -a Signal.app
+launch < z : skhd -k "escape"; open -a Zen.app
+
 
 launch < cmd - s : skhd -k "escape"; pmset sleepnow
 #source .zshenv && aerc
