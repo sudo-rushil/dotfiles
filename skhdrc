@@ -90,6 +90,10 @@ launch < k : skhd -k "escape"; kaomoji.sh
 launch < a : skhd -k "escape"; kitty --single-instance; cliclick t:aerc kp:return
 launch < s : skhd -k "escape"; open -a Signal.app
 launch < z : skhd -k "escape"; open -a Zen.app
+# Plover stenotype support
+launch < 0 : skhd -k "escape"; /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle 
+
+
 
 
 launch < cmd - s : skhd -k "escape"; pmset sleepnow
