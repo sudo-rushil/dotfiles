@@ -284,6 +284,7 @@ return {
 					},
 				},
 				rust_analyzer = {},
+				ts_ls = {},
 			}
 
 			require("mason").setup()
@@ -353,6 +354,7 @@ return {
 				rust = { "rustfmt" },
 				v = { "v" },
 				go = { "gofmt" },
+				typescript = { "biome" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--

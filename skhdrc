@@ -66,13 +66,13 @@
 #               an EOL character signifies the end of the bind.
 
 # terminal
-lalt - return : kitty --single-instance --directory ~
+alt - return : kitty --single-instance --directory ~
 
 # browser
 shift + lalt - return : librewolf --new-window
 
 # music player
-lalt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
+alt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
 
 :: default : sketchybar --trigger skhd_launch_mode_toggled MODE=off #; echo "default mode" # should notify sketchybar
 :: launch @ : sketchybar --trigger skhd_launch_mode_toggled MODE=on #; echo "launch mode" # should notify sketchybar
@@ -120,7 +120,8 @@ launch < cmd - s : skhd -k "escape"; pmset sleepnow
 
 #(export LANG='en_US.UTF-8' && kaomoji.sh | pbcopy) && cliclick kd:cmd t:v ku:cmd
 
-cmd - space : cat ~/.local/share/applications.txt | choose -z | xargs -I{} open -a {}.app
+# cool, but conflicts with too many things
+#cmd - space : cat ~/.local/share/applications.txt | choose -z | xargs -I{} open -a {}.app
 
 # pbcopy < ~/.local/state/kaomoji
 
@@ -142,10 +143,10 @@ shift + lalt - 5 : yabai -m window --space 5
 shift + lalt - 6 : yabai -m window --space 6
 
 # Window navigation
-lalt - h : yabai -m window --focus west
-lalt - j : yabai -m window --focus south
-lalt - k : yabai -m window --focus north
-lalt - l : yabai -m window --focus east
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
 
 launch < h : skhd -k "escape"; yabai -m space --focus prev
 launch < l : skhd -k "escape"; yabai -m space --focus next

@@ -64,3 +64,11 @@ export DOOMDIR="$HOME/.dotfiles/doom"
 # LLVM support
 export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
 export PATH="$PATH:$(brew --prefix)/opt/riscv-gnu-toolchain/bin"
+
+# pnpm
+export PNPM_HOME="/Users/rushilma/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
