@@ -41,6 +41,9 @@ vim.opt.inccommand = "split"
 -- keep 5 lines above/below cursor
 vim.opt.scrolloff = 5
 
+-- use system clipboard
+vim.opt.clipboard = "unnamedplus"
+
 -- vim.keymap.set("n", "<leader>sp", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 -- undoing heresy
@@ -59,5 +62,11 @@ vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move right" })
 -- diagnostics (redundant with d] d[?)
 -- vim.api.nvim_set_keymap("n", "<leader>d[", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<leader>d]", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
+
+vim.filetype.add({
+	extension = {
+		baml = "baml",
+	},
+})
 
 -- vim: ts=2 sts=2 sw=2 et

@@ -518,6 +518,7 @@ return {
 			auto_install = true,
 			highlight = {
 				enable = true,
+				disable = { "dockerfile" },
 			},
 			indent = { enable = true },
 			textobjects = {
