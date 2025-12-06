@@ -5,3 +5,4 @@ spell/
 .zsh_history
 .zcompcache/
 .zsh_sessions/
+.DS_Store
