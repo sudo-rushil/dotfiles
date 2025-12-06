@@ -66,7 +66,8 @@
 #               an EOL character signifies the end of the bind.
 
 # terminal
-alt - return : kitty --single-instance --directory ~
+# alt - return : kitty --single-instance --directory ~
+alt - return : kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty --directory ~
 
 # browser
 shift + lalt - return : librewolf --new-window
@@ -94,7 +95,7 @@ launch < z : skhd -k "escape"; open -a Zen.app
 launch < 0 : skhd -k "escape"; /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle 
 
 
-
+ctrl - space : kitab.sh
 
 launch < cmd - s : skhd -k "escape"; pmset sleepnow
 #source .zshenv && aerc
