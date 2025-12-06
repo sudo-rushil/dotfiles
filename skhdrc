@@ -70,10 +70,10 @@
 alt - return : kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty --directory ~
 
 # browser
-shift + lalt - return : librewolf --new-window
+# shift + lalt - return : librewolf --new-window
 
 # music player
-alt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
+# alt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
 
 :: default : sketchybar --trigger skhd_launch_mode_toggled MODE=off #; echo "default mode" # should notify sketchybar
 :: launch @ : sketchybar --trigger skhd_launch_mode_toggled MODE=on #; echo "launch mode" # should notify sketchybar
@@ -81,43 +81,11 @@ alt - o : mpc $(echo 'toggle\nprev\nnext\nstop' | choose -p toggle)
 lalt - space ; launch 
 launch < escape ; default
 
-launch < m : skhd -k "escape"; kitty --single-instance ncmpcpp
-launch < n : skhd -k "escape"; kitty --single-instance newsboat
-launch < v : skhd -k "escape"; cd ~/videos/downloads && mpv "$(fd -e mkv | choose -z)" 
-launch < f : skhd -k "escape"; kitty --single-instance lf ~
 launch < b : skhd -k "escape"; bookmark.sh 
 launch < k : skhd -k "escape"; kaomoji.sh
-#launch < s : skhd -k "escape"; save_bookmark.sh
 launch < a : skhd -k "escape"; kitty --single-instance; cliclick t:aerc kp:return
-launch < s : skhd -k "escape"; open -a Signal.app
-launch < z : skhd -k "escape"; open -a Zen.app
-# Plover stenotype support
-launch < 0 : skhd -k "escape"; /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle 
-
 
 ctrl - space : kitab.sh
-
-launch < cmd - s : skhd -k "escape"; pmset sleepnow
-#source .zshenv && aerc
-
-#shift + lalt - m : kitty --single-instance ncmpcpp
-
-# RSS reader
-#shift + lalt - n : kitty --single-instance newsboat
-
-# recent video downloads
-#shift + lalt - v : cd ~/videos/downloads && mpv "$(fd -e mkv | choose -z)" 
-
-# file manager
-#shift + lalt - f : kitty --single-instance lf ~
-
-# open bookmarks
-#shift + lalt - b : bookmark.sh # firefox --new-tab "$(choose < ~/.local/share/bookmarks.txt | cut -d, -f2)"
-
-#shift + lalt - b : firefox --new-tab "$(choose < ~/.local/share/bookmarks.txt | cut -d, -f2)"
-
-# paste kaomoji
-#shift + lalt - l : kaomoji.sh
 
 #(export LANG='en_US.UTF-8' && kaomoji.sh | pbcopy) && cliclick kd:cmd t:v ku:cmd
 
