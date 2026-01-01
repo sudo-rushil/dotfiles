@@ -65,6 +65,9 @@ export DOOMDIR="$HOME/.dotfiles/doom"
 export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
 export PATH="$PATH:$(brew --prefix)/opt/riscv-gnu-toolchain/bin"
 
+# Postgres support
+export PATH="$PATH:$(brew --prefix)/opt/postgresql@17/bin"
+
 # pnpm
 export PNPM_HOME="/Users/rushilma/Library/pnpm"
 case ":$PATH:" in
