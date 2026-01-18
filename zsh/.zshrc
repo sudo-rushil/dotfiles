@@ -75,3 +75,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Zig
+export PATH="/Users/rushilma/.zig:$PATH"
+
+# Keys
+source .env

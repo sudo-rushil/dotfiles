@@ -1,0 +1,823 @@
+#compdef linear
+
+# zsh completion support for linear v1.7.0
+
+autoload -U is-at-least
+
+# shellcheck disable=SC2154
+(( $+functions[__linear_complete] )) ||
+function __linear_complete {
+  local name="$1"; shift
+  local action="$1"; shift
+  integer ret=1
+  local -a values
+  local expl lines
+  _tags "$name"
+  while _tags; do
+    if _requested "$name"; then
+      # shellcheck disable=SC2034
+      lines="$(linear completions complete "${action}" "${@}")"
+      values=("${(ps:\n:)lines}")
+      if (( ${#values[@]} )); then
+        while _next_label "$name" expl "$action"; do
+          compadd -S '' "${expl[@]}" "${values[@]}"
+        done
+      fi
+    fi
+  done
+}
+
+# shellcheck disable=SC2154
+_linear() {
+  local state
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'auth:Manage Linear authentication'
+      'issue:Manage Linear issues'
+      'team:Manage Linear teams'
+      'project:Manage Linear projects'
+      'milestone:Manage Linear project milestones'
+      'completions:Generate shell completions.'
+      'config:Interactively generate .linear.toml configuration'
+      'schema:Print the GraphQL schema to stdout'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      auth) _linear_auth ;;
+      issue|i) _linear_issue ;;
+      team|t) _linear_team ;;
+      project|p) _linear_project ;;
+      milestone|m) _linear_milestone ;;
+      completions) _linear_completions ;;
+      config) _linear_config ;;
+      schema) _linear_schema ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(- *)'{-V,--version}'[Show the version number for this program.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_auth] )) || _linear_auth() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'token:Print the configured API token'
+      'whoami:Print information about the authenticated user'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      token) _linear_auth_token ;;
+      whoami) _linear_auth_whoami ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_auth_token] )) || _linear_auth_token() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_auth_whoami] )) || _linear_auth_whoami() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue] )) || _linear_issue() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'id:Print the issue based on the current git branch'
+      'list:List your issues'
+      'title:Print the issue title'
+      'start:Start working on an issue'
+      'view:View issue details (default) or open in browser/app'
+      'url:Print the issue URL'
+      'describe:Print the issue title and Linear-issue trailer'
+      'commits:Show all commits for a Linear issue (jj only)'
+      'pull-request:Create a GitHub pull request with issue details'
+      'delete:Delete an issue'
+      'create:Create a linear issue'
+      'update:Update a linear issue'
+      'comment:Manage issue comments'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      id) _linear_issue_id ;;
+      list) _linear_issue_list ;;
+      title) _linear_issue_title ;;
+      start) _linear_issue_start ;;
+      view|v) _linear_issue_view ;;
+      url) _linear_issue_url ;;
+      describe) _linear_issue_describe ;;
+      commits) _linear_issue_commits ;;
+      pull-request|pr) _linear_issue_pull_request ;;
+      delete|d) _linear_issue_delete ;;
+      create) _linear_issue_create ;;
+      update) _linear_issue_update ;;
+      comment) _linear_issue_comment ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_id] )) || _linear_issue_id() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_list] )) || _linear_issue_list() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help)'{*-s,--state}'[Filter by issue state (can be repeated for multiple states)]:state:->state-state' \
+    '(-h --help --all-states)'--all-states'[Show issues from all states]' \
+    '(-h --help --assignee)'--assignee'[Filter by assignee (username)]:assignee:->assignee-string' \
+    '(-h --help -A --all-assignees)'{-A,--all-assignees}'[Show issues for all assignees]' \
+    '(-h --help -U --unassigned)'{-U,--unassigned}'[Show only unassigned issues]' \
+    '(-h --help --sort)'--sort'[Sort order (can also be set via LINEAR_ISSUE_SORT)]:sort:->sort-sort' \
+    '(-h --help --team)'--team'[Team to list issues for (if not your default team)]:team:->team-string' \
+    '(-h --help --limit)'--limit'[Maximum number of issues to fetch (default: 50, use 0 for unlimited)]:limit:->limit-number' \
+    '(-h --help -w --web)'{-w,--web}'[Open in web browser]' \
+    '(-h --help -a --app)'{-a,--app}'[Open in Linear.app]' \
+    '(-h --help --no-pager)'--no-pager'[Disable automatic paging for long output]'
+
+  case "$state" in
+    state-state) __linear_complete state state issue list ;;
+    assignee-string) __linear_complete assignee string issue list ;;
+    sort-sort) __linear_complete sort sort issue list ;;
+    team-string) __linear_complete team string issue list ;;
+    limit-number) __linear_complete limit number issue list ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_title] )) || _linear_issue_title() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_start] )) || _linear_issue_start() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -A --all-assignees)'{-A,--all-assignees}'[Show issues for all assignees]' \
+    '(-h --help -U --unassigned)'{-U,--unassigned}'[Show only unassigned issues]' \
+    '(-h --help -f --from-ref)'{-f,--from-ref}'[Git ref to create new branch from]:fromRef:->fromRef-string' \
+    '(-h --help -b --branch)'{-b,--branch}'[Custom branch name to use instead of the issue identifier]:branch:->branch-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    fromRef-string) __linear_complete fromRef string issue start ;;
+    branch-string) __linear_complete branch string issue start ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_view] )) || _linear_issue_view() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -w --web)'{-w,--web}'[Open in web browser]' \
+    '(-h --help -a --app)'{-a,--app}'[Open in Linear.app]' \
+    '(-h --help --no-comments)'--no-comments'[Exclude comments from the output]' \
+    '(-h --help --no-pager)'--no-pager'[Disable automatic paging for long output]' \
+    '(-h --help -j --json)'{-j,--json}'[Output issue data as JSON]' \
+    '(-h --help --no-download)'--no-download'[Keep remote URLs instead of downloading files]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_url] )) || _linear_issue_url() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_describe] )) || _linear_issue_describe() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -r --references --ref)'{-r,--references,--ref}'[Use '"'"'References'"'"' instead of '"'"'Fixes'"'"' for the Linear issue link]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_commits] )) || _linear_issue_commits() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_pull_request] )) || _linear_issue_pull_request() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --base)'--base'[The branch into which you want your code merged]:branch:->branch-string' \
+    '(-h --help --draft)'--draft'[Create the pull request as a draft]' \
+    '(-h --help -t --title)'{-t,--title}'[Optional title for the pull request (Linear issue ID will be prefixed)]:title:->title-string' \
+    '(-h --help --web)'--web'[Open the pull request in the browser after creating it]' \
+    '(-h --help --head)'--head'[The branch that contains commits for your pull request]:branch:->branch-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    branch-string) __linear_complete branch string issue pull-request ;;
+    title-string) __linear_complete title string issue pull-request ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_delete] )) || _linear_issue_delete() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -y --confirm)'{-y,--confirm}'[Skip confirmation prompt]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_create] )) || _linear_issue_create() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --start)'--start'[Start the issue after creation]' \
+    '(-h --help -a --assignee)'{-a,--assignee}'[Assign the issue to '"'"'self'"'"' or someone (by username or name)]:assignee:->assignee-string' \
+    '(-h --help --due-date)'--due-date'[Due date of the issue]:dueDate:->dueDate-string' \
+    '(-h --help -p --parent)'{-p,--parent}'[Parent issue (if any) as a team_number code]:parent:->parent-string' \
+    '(-h --help --priority)'--priority'[Priority of the issue (1-4, descending priority)]:priority:->priority-number' \
+    '(-h --help --estimate)'--estimate'[Points estimate of the issue]:estimate:->estimate-number' \
+    '(-h --help -d --description)'{-d,--description}'[Description of the issue]:description:->description-string' \
+    '(-h --help -l --label)'{-l,--label}'[Issue label associated with the issue. May be repeated.]::label:->label-string' \
+    '(-h --help --team)'--team'[Team associated with the issue (if not your default team)]:team:->team-string' \
+    '(-h --help --project)'--project'[Name of the project with the issue]:project:->project-string' \
+    '(-h --help -s --state)'{-s,--state}'[Workflow state for the issue (by name or type)]:state:->state-string' \
+    '(-h --help --no-use-default-template)'--no-use-default-template'[Do not use default template for the issue]' \
+    '(-h --help --no-color)'--no-color'[Disable colored output]' \
+    '(-h --help --no-interactive)'--no-interactive'[Disable interactive prompts]' \
+    '(-h --help -t --title)'{-t,--title}'[Title of the issue]:title:->title-string'
+
+  case "$state" in
+    assignee-string) __linear_complete assignee string issue create ;;
+    dueDate-string) __linear_complete dueDate string issue create ;;
+    parent-string) __linear_complete parent string issue create ;;
+    priority-number) __linear_complete priority number issue create ;;
+    estimate-number) __linear_complete estimate number issue create ;;
+    description-string) __linear_complete description string issue create ;;
+    label-string) __linear_complete label string issue create ;;
+    team-string) __linear_complete team string issue create ;;
+    project-string) __linear_complete project string issue create ;;
+    state-string) __linear_complete state string issue create ;;
+    title-string) __linear_complete title string issue create ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_update] )) || _linear_issue_update() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -a --assignee)'{-a,--assignee}'[Assign the issue to '"'"'self'"'"' or someone (by username or name)]:assignee:->assignee-string' \
+    '(-h --help --due-date)'--due-date'[Due date of the issue]:dueDate:->dueDate-string' \
+    '(-h --help -p --parent)'{-p,--parent}'[Parent issue (if any) as a team_number code]:parent:->parent-string' \
+    '(-h --help --priority)'--priority'[Priority of the issue (1-4, descending priority)]:priority:->priority-number' \
+    '(-h --help --estimate)'--estimate'[Points estimate of the issue]:estimate:->estimate-number' \
+    '(-h --help -d --description)'{-d,--description}'[Description of the issue]:description:->description-string' \
+    '(-h --help -l --label)'{-l,--label}'[Issue label associated with the issue. May be repeated.]::label:->label-string' \
+    '(-h --help --team)'--team'[Team associated with the issue (if not your default team)]:team:->team-string' \
+    '(-h --help --project)'--project'[Name of the project with the issue]:project:->project-string' \
+    '(-h --help -s --state)'{-s,--state}'[Workflow state for the issue (by name or type)]:state:->state-string' \
+    '(-h --help --no-color)'--no-color'[Disable colored output]' \
+    '(-h --help -t --title)'{-t,--title}'[Title of the issue]:title:->title-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    assignee-string) __linear_complete assignee string issue update ;;
+    dueDate-string) __linear_complete dueDate string issue update ;;
+    parent-string) __linear_complete parent string issue update ;;
+    priority-number) __linear_complete priority number issue update ;;
+    estimate-number) __linear_complete estimate number issue update ;;
+    description-string) __linear_complete description string issue update ;;
+    label-string) __linear_complete label string issue update ;;
+    team-string) __linear_complete team string issue update ;;
+    project-string) __linear_complete project string issue update ;;
+    state-string) __linear_complete state string issue update ;;
+    title-string) __linear_complete title string issue update ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_comment] )) || _linear_issue_comment() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'add:Add a comment to an issue or reply to a comment'
+      'update:Update an existing comment'
+      'list:List comments for an issue'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      add) _linear_issue_comment_add ;;
+      update) _linear_issue_comment_update ;;
+      list) _linear_issue_comment_list ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_comment_add] )) || _linear_issue_comment_add() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -b --body)'{-b,--body}'[Comment body text]:text:->text-string' \
+    '(-h --help -p --parent)'{-p,--parent}'[Parent comment ID for replies]:id:->id-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    text-string) __linear_complete text string issue comment add ;;
+    id-string) __linear_complete id string issue comment add ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_comment_update] )) || _linear_issue_comment_update() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -b --body)'{-b,--body}'[New comment body text]:text:->text-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    text-string) __linear_complete text string issue comment update ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_issue_comment_list] )) || _linear_issue_comment_list() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -j --json)'{-j,--json}'[Output as JSON]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team] )) || _linear_team() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'create:Create a linear team'
+      'list:List teams'
+      'id:Print the configured team id'
+      'autolinks:Configure GitHub repository autolinks for Linear issues with this team prefix'
+      'members:List team members'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      create) _linear_team_create ;;
+      list) _linear_team_list ;;
+      id) _linear_team_id ;;
+      autolinks) _linear_team_autolinks ;;
+      members) _linear_team_members ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team_create] )) || _linear_team_create() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -n --name)'{-n,--name}'[Name of the team]:name:->name-string' \
+    '(-h --help -d --description)'{-d,--description}'[Description of the team]:description:->description-string' \
+    '(-h --help -k --key)'{-k,--key}'[Team key (if not provided, will be generated from name)]:key:->key-string' \
+    '(-h --help --private)'--private'[Make the team private]' \
+    '(-h --help --no-color)'--no-color'[Disable colored output]' \
+    '(-h --help --no-interactive)'--no-interactive'[Disable interactive prompts]'
+
+  case "$state" in
+    name-string) __linear_complete name string team create ;;
+    description-string) __linear_complete description string team create ;;
+    key-string) __linear_complete key string team create ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team_list] )) || _linear_team_list() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -w --web)'{-w,--web}'[Open in web browser]' \
+    '(-h --help -a --app)'{-a,--app}'[Open in Linear.app]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team_id] )) || _linear_team_id() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team_autolinks] )) || _linear_team_autolinks() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_team_members] )) || _linear_team_members() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -a --all)'{-a,--all}'[Include inactive members]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_project] )) || _linear_project() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'list:List projects'
+      'view:View project details'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      list) _linear_project_list ;;
+      view|v) _linear_project_view ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_project_list] )) || _linear_project_list() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --team)'--team'[Filter by team key]:team:->team-string' \
+    '(-h --help --all-teams)'--all-teams'[Show projects from all teams]' \
+    '(-h --help --status)'--status'[Filter by status name]:status:->status-string' \
+    '(-h --help -w --web)'{-w,--web}'[Open in web browser]' \
+    '(-h --help -a --app)'{-a,--app}'[Open in Linear.app]'
+
+  case "$state" in
+    team-string) __linear_complete team string project list ;;
+    status-string) __linear_complete status string project list ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_project_view] )) || _linear_project_view() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -w --web)'{-w,--web}'[Open in web browser]' \
+    '(-h --help -a --app)'{-a,--app}'[Open in Linear.app]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone] )) || _linear_milestone() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'list:List milestones for a project'
+      'view:View milestone details'
+      'create:Create a new project milestone'
+      'update:Update an existing project milestone'
+      'delete:Delete a project milestone'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      list) _linear_milestone_list ;;
+      view|v) _linear_milestone_view ;;
+      create) _linear_milestone_create ;;
+      update) _linear_milestone_update ;;
+      delete) _linear_milestone_delete ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone_list] )) || _linear_milestone_list() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --project)'--project'[Project ID]:projectId:->projectId-string'
+
+  case "$state" in
+    projectId-string) __linear_complete projectId string milestone list ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone_view] )) || _linear_milestone_view() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone_create] )) || _linear_milestone_create() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --project)'--project'[Project ID]:projectId:->projectId-string' \
+    '(-h --help --name)'--name'[Milestone name]:name:->name-string' \
+    '(-h --help --description)'--description'[Milestone description]:description:->description-string' \
+    '(-h --help --target-date)'--target-date'[Target date (YYYY-MM-DD)]:date:->date-string'
+
+  case "$state" in
+    projectId-string) __linear_complete projectId string milestone create ;;
+    name-string) __linear_complete name string milestone create ;;
+    description-string) __linear_complete description string milestone create ;;
+    date-string) __linear_complete date string milestone create ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone_update] )) || _linear_milestone_update() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --name)'--name'[Milestone name]:name:->name-string' \
+    '(-h --help --description)'--description'[Milestone description]:description:->description-string' \
+    '(-h --help --target-date)'--target-date'[Target date (YYYY-MM-DD)]:date:->date-string' \
+    '(-h --help --project)'--project'[Move to a different project]:projectId:->projectId-string' \
+    '1:command:_commands'
+
+  case "$state" in
+    name-string) __linear_complete name string milestone update ;;
+    description-string) __linear_complete description string milestone update ;;
+    date-string) __linear_complete date string milestone update ;;
+    projectId-string) __linear_complete projectId string milestone update ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_milestone_delete] )) || _linear_milestone_delete() {
+
+  function _commands() {
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -f --force)'{-f,--force}'[Skip confirmation prompt]' \
+    '1:command:_commands'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_completions] )) || _linear_completions() {
+
+  function _commands() {
+    local -a commands
+    # shellcheck disable=SC2034
+    commands=(
+      'bash:Generate shell completions for bash.'
+      'fish:Generate shell completions for fish.'
+      'zsh:Generate shell completions for zsh.'
+    )
+    _describe 'command' commands
+  }
+
+  function _command_args() {
+    case "${words[1]}" in
+      bash) _linear_completions_bash ;;
+      fish) _linear_completions_fish ;;
+      zsh) _linear_completions_zsh ;;
+    esac
+  }
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '1:command:_commands' \
+    '*::sub command:->command_args'
+
+  case "$state" in
+    command_args) _command_args ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_completions_bash] )) || _linear_completions_bash() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -n --name)'{-n,--name}'[The name of the main command.]:command-name:->command-name-string'
+
+  case "$state" in
+    command-name-string) __linear_complete command-name string completions bash ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_completions_fish] )) || _linear_completions_fish() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -n --name)'{-n,--name}'[The name of the main command.]:command-name:->command-name-string'
+
+  case "$state" in
+    command-name-string) __linear_complete command-name string completions fish ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_completions_zsh] )) || _linear_completions_zsh() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help -n --name)'{-n,--name}'[The name of the main command.]:command-name:->command-name-string'
+
+  case "$state" in
+    command-name-string) __linear_complete command-name string completions zsh ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_config] )) || _linear_config() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]'
+}
+
+# shellcheck disable=SC2154
+(( $+functions[_linear_schema] )) || _linear_schema() {
+
+  _arguments -w -s -S -C \
+    '(- *)'{-h,--help}'[Show this help.]' \
+    '(-h --help --json)'--json'[Output as JSON introspection result instead of SDL]' \
+    '(-h --help -o --output)'{-o,--output}'[Write schema to file instead of stdout]:file:->file-string'
+
+  case "$state" in
+    file-string) __linear_complete file string schema ;;
+  esac
+}
+
+# shellcheck disable=SC2154
+if [ "${funcstack[1]}" = "_linear" ]; then
+  _linear "${@}"
+else
+  compdef _linear linear;
+fi

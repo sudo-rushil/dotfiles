@@ -1,0 +1,7 @@
+#compdef reducto
+
+_reducto_completion() {
+  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _REDUCTO_COMPLETE=complete_zsh reducto)
+}
+
+compdef _reducto_completion reducto
