@@ -1,7 +1,8 @@
 return {
 	-- colorscheme
 	-- { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
-	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
+	-- { "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
+	{ "neanias/everforest-nvim", name = "everforest", lazy = false, priority = 1000 },
 
 	-- kickstart.nvim inspired:
 	-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L188

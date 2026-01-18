@@ -38,11 +38,19 @@ vim.cmd.colorscheme("catppuccin")
 ]]
 --
 
+--[[
 require("rose-pine").setup({
 	variant = "dawn", -- auto, main, moon, or dawn
-	dark_variant = "main", -- main, moon, or dawn
+	dark_variant = "moon", -- main, moon, or dawn
 })
 
 vim.cmd.colorscheme("rose-pine")
+]]
+
+require("everforest").setup({
+	background = "medium",
+})
+
+vim.cmd.colorscheme("everforest")
 
 -- vim: ts=2 sts=2 sw=2 et
