@@ -80,4 +80,4 @@ esac
 export PATH="/Users/rushilma/.zig:$PATH"
 
 # Keys
-source .env
+source $ZDOTDIR/.env
