@@ -8,3 +8,6 @@ alias lg='lazygit'
 
 # neovim
 alias nf='nvim $(fzf)'
+
+# bun pipeline
+alias bp='bun pipeline'
