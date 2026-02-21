@@ -81,3 +81,7 @@ export PATH="/Users/rushilma/.zig:$PATH"
 
 # Keys
 source $ZDOTDIR/.env
+
+# bun completions
+[ -s "/Users/rushilma/.bun/_bun" ] && source "/Users/rushilma/.bun/_bun"
+export PATH="/Users/rushilma/.bun/bin:$PATH"

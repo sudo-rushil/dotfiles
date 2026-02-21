@@ -9,5 +9,6 @@ alias lg='lazygit'
 # neovim
 alias nf='nvim $(fzf)'
 
-# bun pipeline
+# bun
 alias bp='bun pipeline'
+alias bs='bun agent-tauri start'
