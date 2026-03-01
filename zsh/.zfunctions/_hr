@@ -1,0 +1,7 @@
+#compdef hr
+
+_hr_completion() {
+  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _HR_COMPLETE=complete_zsh hr)
+}
+
+compdef _hr_completion hr
