@@ -1,7 +1,5 @@
 return {
 	-- colorscheme
-	-- { "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000 },
-	-- { "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
 	{ "neanias/everforest-nvim", name = "everforest", lazy = false, priority = 1000 },
 
 	-- kickstart.nvim inspired:
@@ -349,12 +347,8 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				c = { "clang-format" },
-				cpp = { "clang-format" },
-				gdscript = { "gdformat" },
 				typst = { "typstyle" },
 				rust = { "rustfmt" },
-				v = { "v" },
-				go = { "gofmt" },
 				typescript = { "biome" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
@@ -500,7 +494,6 @@ return {
 				"bash",
 				"c",
 				"diff",
-				"gdscript",
 				"html",
 				"lua",
 				"luadoc",
@@ -512,9 +505,6 @@ return {
 				"vimdoc",
 				"rust",
 				"python",
-				"clojure",
-				"v",
-				"go",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
@@ -581,20 +571,13 @@ return {
 	},
 
 	{
-		"nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup()
-		end,
-	}, -- not strictly required, but recommended
-
-	{
 		"stevearc/oil.nvim",
 		--- @module 'oil'
 		--- @type oil.SetupOpts
 		opts = {},
 		-- Optional dependencies
-		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 		lazy = false,
 	},
@@ -604,83 +587,6 @@ return {
 		"dgagn/diagflow.nvim",
 		event = "LspAttach", -- This is what I use personnally and it works great
 		opts = {},
-	},
-
-	-- {
-	-- 	"Olical/conjure",
-	-- 	ft = { "clojure", "python" }, -- etc
-	-- 	lazy = true,
-	-- 	init = function()
-	-- 		-- Set configuration options here
-	-- 		-- Uncomment this to get verbose logging to help diagnose internal Conjure issues
-	-- 		-- This is VERY helpful when reporting an issue with the project
-	-- 		-- vim.g["conjure#debug"] = true
-	-- 	end,
-	--
-	-- 	-- Optional cmp-conjure integration
-	-- 	dependencies = { "PaterJason/cmp-conjure" },
-	-- },
-	-- {
-	-- 	"PaterJason/cmp-conjure",
-	-- 	lazy = true,
-	-- 	config = function()
-	-- 		local cmp = require("cmp")
-	-- 		local config = cmp.get_config()
-	-- 		table.insert(config.sources, { name = "conjure" })
-	-- 		return cmp.setup(config)
-	-- 	end,
-	-- },
-	--
-	{
-		"julienvincent/nvim-paredit",
-		lazy = true,
-		ft = { "clojure", "fennel", "hy" },
-		config = function()
-			local paredit = require("nvim-paredit")
-			paredit.setup({
-				indent = {
-					enabled = true,
-				},
-				keys = {
-					[">)"] = { paredit.api.slurp_forwards, "Slurp forwards" },
-					[">("] = { paredit.api.barf_backwards, "Barf backwards" },
-
-					["<)"] = { paredit.api.barf_forwards, "Barf forwards" },
-					["<("] = { paredit.api.slurp_backwards, "Slurp backwards" },
-				},
-			})
-		end,
-	},
-
-	{
-		"milanglacier/yarepl.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<leader>rs", "<Plug>(REPLStart-ipython)", noremap = true, ft = "python", mode = "n" },
-			{ "<leader>rr", "<Plug>(REPLSendLine)j", noremap = true, mode = "n" },
-			{ "<leader>rr", "<Plug>(REPLSourceVisual)", noremap = true, mode = "v" },
-			{ "<leader>rq", "<Plug>(REPLStart-ipython)", noremap = true, ft = "python", mode = "n" },
-		},
-
-		opts = {
-			ft = "ipython",
-			wincmd = "belowright 14 split",
-			metas = {
-				aichat = false,
-				radian = false,
-				R = false,
-				bash = false,
-				ipython = {
-					cmd = "uv run ipython", -- add it with `uv add --dev ipython`
-					formatter = "bracketed_pasting",
-					source_syntax = "ipython",
-				},
-			},
-			source_command_hint = {
-				enabled = false,
-				hl_group = "Comment",
-			},
-		},
 	},
 }
 -- modeline
