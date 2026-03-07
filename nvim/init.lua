@@ -1,6 +1,6 @@
 -- load options and keymappings
-require("opt")
 require("config.options")
+require("opt")
 
 -- load lazy.nvim
 require("config.lazy")

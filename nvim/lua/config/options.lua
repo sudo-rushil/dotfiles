@@ -2,6 +2,11 @@ local opt = vim.opt
 
 -- Credit to https://tduyng.com/blog/neovim-basic-setup/
 
+-- Global flags
+vim.g.mapleader = " " -- needs to be moved up
+vim.g.maplocalleader = " "
+vim.g.have_nerd_font = true
+
 -- Numbering
 opt.number = true -- Line numbers
 opt.relativenumber = true -- Relative line numbers
@@ -59,10 +64,8 @@ opt.clipboard = "unnamedplus" -- Use system clipboard
 
 -- No folding configured
 
--- Global flags
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.have_nerd_font = true
+-- Whitespace
+opt.linebreak = true -- Wrap lines on linebreaks
+opt.list = true -- Show some invisible characters (currently tabs, trailing spaces, and nbsp)
 
 -- vim: ts=2 sts=2 sw=2 et
