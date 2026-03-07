@@ -19,15 +19,6 @@ vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 --vim.keymap.set("n", ":", ";")
 --vim.keymap.set("n", ";", ":")
 
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- wincmd
-vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move left" })
-vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move down" })
-vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move up" })
-vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move right" })
-
 -- Copy selection with file context (filename:line_range + code)
 vim.keymap.set("v", "<leader>y", function()
 	local start_line = vim.fn.line("v")
