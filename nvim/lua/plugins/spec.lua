@@ -271,7 +271,10 @@ return {
 				lua_ls = {
 					settings = {
 						Lua = {
+							runtime = { version = "LuaJIT" },
 							completion = { callSnippet = "Replace" },
+							hint = { enable = true },
+							diagnostics = { globals = { "vim" } },
 						},
 					},
 				},
