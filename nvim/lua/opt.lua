@@ -59,16 +59,6 @@ vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move down" })
 vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move up" })
 vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move right" })
 
--- diagnostics (redundant with d] d[?)
--- vim.api.nvim_set_keymap("n", "<leader>d[", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>d]", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
-
-vim.filetype.add({
-	extension = {
-		baml = "baml",
-	},
-})
-
 -- Copy selection with file context (filename:line_range + code)
 vim.keymap.set("v", "<leader>y", function()
 	local start_line = vim.fn.line("v")
