@@ -8,8 +8,18 @@ local default_keymaps = {
 	{ keys = "<leader>ca", func = vim.lsp.buf.code_action, desc = "Code actions" },
 	{ keys = "<leader>rn", func = vim.lsp.buf.rename, desc = "Code rename" },
 	{ keys = "K", func = vim.lsp.buf.hover, desc = "Hover documentation", has = "hoverProvider" },
-	{ keys = "gd", func = vim.lsp.buf.definition, desc = "Goto definition", has = "definitionProvider" },
-	{ keys = "gD", func = vim.lsp.buf.type_definition, desc = "Goto type definition", has = "typeDefinitionProvider" },
+	{
+		keys = "gd",
+		func = vim.lsp.buf.definition,
+		desc = "Goto definition",
+		has = "definitionProvider",
+	},
+	{
+		keys = "gD",
+		func = vim.lsp.buf.type_definition,
+		desc = "Goto type definition",
+		has = "typeDefinitionProvider",
+	},
 }
 
 local completion = vim.g.completion_mode or "blink"
@@ -44,6 +54,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end
 		end
 	end,
+})
+
+vim.lsp.config("*", {
+	capabilities = {
+		general = {
+			positionEncodings = { "utf-16" },
+		},
+	},
 })
 
 vim.lsp.enable({
