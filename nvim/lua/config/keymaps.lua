@@ -52,3 +52,27 @@ map("i", ";", ";<C-g>u")
 map({ "i", "x", "n", "s" }, "<leader>ww", "<cmd>w<CR><Esc>", { desc = "Save file" })
 map("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit all" })
 map("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Save and quit" })
+
+-- Copy with file context
+map("v", "<leader>y", function()
+	local start_line = vim.fn.line("v")
+	local end_line = vim.fn.line(".")
+	if start_line > end_line then
+		start_line, end_line = end_line, start_line
+	end
+
+	local filename = vim.fn.expand("%:.") -- relative path
+	local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+	local code = table.concat(lines, "\n")
+
+	local line_ref
+	if start_line == end_line then
+		line_ref = tostring(start_line)
+	else
+		line_ref = start_line .. "-" .. end_line
+	end
+
+	local result = filename .. ":" .. line_ref .. "\n" .. code
+	vim.fn.setreg("+", result)
+	vim.notify("Copied: " .. filename .. ":" .. line_ref, vim.log.levels.INFO)
+end, { desc = "Yank selection with context" })

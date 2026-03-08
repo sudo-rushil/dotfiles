@@ -36,6 +36,7 @@ opt.pumblend = 25 -- Popup menu transparency
 opt.winblend = 25 -- Floating window transparency
 opt.synmaxcol = 300 -- Syntax highlighting limit
 opt.inccommand = "split" -- Preview substitutions live
+opt.signcolumn = "yes" -- Always show sign column
 
 -- File handling
 opt.backup = false -- Don't create backup
