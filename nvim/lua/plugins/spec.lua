@@ -167,6 +167,7 @@ return {
 	{ "Bilal2453/luvit-meta", lazy = true },
 
 	-- LSP Configuration
+	{ "neovim/nvim-lspconfig", lazy = false },
 	-- {
 	-- 	"neovim/nvim-lspconfig",
 	-- 	dependencies = {
@@ -561,17 +562,6 @@ return {
 	},
 
 	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-
-	{
-		"chomosuke/typst-preview.nvim",
-		lazy = false, -- or ft = 'typst'
-		version = "1.*",
-		opts = {
-			dependencies_bin = {
-				["tinymist"] = "tinymist",
-			},
-		}, -- lazy.nvim will implicitly calls `setup {}`
-	},
 
 	{
 		"stevearc/oil.nvim",

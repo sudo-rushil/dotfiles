@@ -1,3 +1,5 @@
+-- Credit to https://tduyng.com/blog/neovim-lsp-native/
+
 local augroup = function(name)
 	return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
 end
@@ -5,7 +7,7 @@ end
 local default_keymaps = {
 	{ keys = "<leader>ca", func = vim.lsp.buf.code_action, desc = "Code actions" },
 	{ keys = "<leader>rn", func = vim.lsp.buf.rename, desc = "Code rename" },
-	{ keys = "<leader>k", func = vim.lsp.buf.hover, desc = "Hover documentation", has = "hoverProvider" },
+	{ keys = "K", func = vim.lsp.buf.hover, desc = "Hover documentation", has = "hoverProvider" },
 	{ keys = "gd", func = vim.lsp.buf.definition, desc = "Goto definition", has = "definitionProvider" },
 	{ keys = "gD", func = vim.lsp.buf.type_definition, desc = "Goto type definition", has = "typeDefinitionProvider" },
 }
@@ -20,9 +22,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 			end
 
-			if client:supports_method("textDocument/inlayHint") then
-				vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-			end
+			-- if client:supports_method("textDocument/inlayHint") then
+			-- 	vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+			-- end
 
 			if client:supports_method("textDocument/documentColor") then
 				vim.lsp.document_color.enable(true, args.buf, {
@@ -48,7 +50,7 @@ vim.lsp.enable({
 	"biome",
 	"clangd",
 	"lua_ls",
-	"rust-analyzer",
+	"rust_analyzer",
 	"stylua",
 	"tailwindcss",
 	"ts_ls",

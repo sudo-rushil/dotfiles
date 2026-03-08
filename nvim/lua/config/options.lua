@@ -1,6 +1,6 @@
-local opt = vim.opt
-
 -- Credit to https://tduyng.com/blog/neovim-basic-setup/
+
+local opt = vim.opt
 
 -- Global flags
 vim.g.mapleader = " " -- needs to be moved up

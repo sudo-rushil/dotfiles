@@ -85,7 +85,7 @@ return {
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" },
-			diagnostics = { global = { "vim" } },
+			diagnostics = { globals = { "vim" } },
 			codeLens = { enable = true },
 			hint = { enable = true, semicolon = "Disable" },
 		},
