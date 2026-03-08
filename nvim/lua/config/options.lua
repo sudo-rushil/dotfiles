@@ -27,8 +27,8 @@ opt.grepprg = "rg --vimgrep" -- Enable ripgrep for search
 -- Visuals
 opt.termguicolors = true -- Enable 24-bit colors
 opt.pumheight = 10 -- Popup menu height (e.g. for insert completions)
-opt.pumblend = 25 -- Popup menu transparency
-opt.winblend = 25 -- Floating window transparency
+opt.pumblend = 10 -- Popup menu transparency
+opt.winblend = 10 -- Floating window transparency
 opt.synmaxcol = 300 -- Syntax highlighting limit
 opt.inccommand = "split" -- Preview substitutions live
 opt.signcolumn = "yes" -- Always show sign column
