@@ -25,6 +25,14 @@
       "rev": "bbba4051c862473637e98277f284d12b050588ca",
       "src": "git@github.com:nicolasgb/jj.nvim"
     },
+    "lazydev.nvim": {
+      "rev": "5231c62aa83c2f8dc8e7ba957aa77098cda1257d",
+      "src": "git@github.com:folke/lazydev.nvim"
+    },
+    "luvit-meta": {
+      "rev": "cc9b2d412d2fbd30b94a70cfc214c2a3be27a0a2",
+      "src": "git@github.com:Bilal2453/luvit-meta"
+    },
     "nvim-lspconfig": {
       "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
       "src": "git@github.com:neovim/nvim-lspconfig"
