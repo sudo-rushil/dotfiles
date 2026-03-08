@@ -3,7 +3,7 @@ vim.pack.add({
 }, { confirm = false })
 
 require("conform").setup({
-	formatter_by_ft = {
+	formatters_by_ft = {
 		c = { "clang-format" },
 		javascript = { "biome-check" },
 		javascriptreact = { "biome-check" },
