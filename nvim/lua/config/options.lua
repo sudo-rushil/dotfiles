@@ -37,6 +37,7 @@ opt.winblend = 25 -- Floating window transparency
 opt.synmaxcol = 300 -- Syntax highlighting limit
 opt.inccommand = "split" -- Preview substitutions live
 opt.signcolumn = "yes" -- Always show sign column
+opt.completeopt = "menu,menuone,popup,noinsert,fuzzy" -- Set completion options
 
 -- File handling
 opt.backup = false -- Don't create backup
