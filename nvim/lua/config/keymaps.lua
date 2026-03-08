@@ -49,9 +49,9 @@ map("i", ";", ";<C-g>u")
 -- map("i", "<", "<><Left>")
 
 -- Save and quit
-map({ "x", "n", "s" }, "www", "<cmd>w<CR><Esc>", { desc = "Save file" })
+map({ "x", "n", "s" }, "<leader>ww", "<cmd>w<CR><Esc>", { desc = "Save file" })
 map("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit all" })
-map("n", "qqq", "<cmd>wq<CR>", { desc = "Save and quit" })
+map("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Save and quit" })
 
 -- Copy with file context
 map("v", "<leader>y", function()
