@@ -7,3 +7,4 @@ require("everforest").setup({
 })
 
 vim.cmd.colorscheme("everforest")
+vim.api.nvim_set_hl(0, "Todo", { link = "Comment" })

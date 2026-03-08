@@ -20,6 +20,16 @@
       "rev": "9912042fc8bca2209105526ac7534e9a0c2071b2",
       "src": "git@github.com:folke/snacks.nvim"
     },
+    "treesitter": {
+      "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
+      "src": "git@github.com:nvim-treesitter/nvim-treesitter.git",
+      "version": "'main'"
+    },
+    "treesitter-textobjects": {
+      "rev": "4e91b5d0394329a229725b021a8ea217099826ef",
+      "src": "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
+      "version": "'main'"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "git@github.com:folke/which-key.nvim"
