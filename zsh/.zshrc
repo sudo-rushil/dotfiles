@@ -62,7 +62,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 export DOOMDIR="$HOME/.dotfiles/doom"
 
 # LLVM support
-export PATH="$PATH:$(brew --prefix)/opt/llvm/bin"
+export PATH="$(brew --prefix)/opt/llvm/bin:$PATH"
 export PATH="$PATH:$(brew --prefix)/opt/riscv-gnu-toolchain/bin"
 
 # Postgres support
