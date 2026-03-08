@@ -49,7 +49,7 @@ map("i", ";", ";<C-g>u")
 -- map("i", "<", "<><Left>")
 
 -- Save and quit
-map({"x", "n", "s" }, "<leader>ww", "<cmd>w<CR><Esc>", { desc = "Save file" })
+map({ "x", "n", "s" }, "<leader>ww", "<cmd>w<CR><Esc>", { desc = "Save file" })
 map("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit all" })
 map("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Save and quit" })
 
@@ -78,4 +78,4 @@ map("v", "<leader>y", function()
 end, { desc = "Yank selection with context" })
 
 -- Update plugins
-map("n", "<leader>pu", "<cmd>lua vim.pack.update()<CR>", {desc = "Update plugins" })
+map("n", "<leader>pu", "<cmd>lua vim.pack.update()<CR>", { desc = "Update plugins" })

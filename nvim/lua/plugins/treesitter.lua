@@ -1,21 +1,25 @@
 vim.pack.add({
-  {src = "git@github.com:nvim-treesitter/nvim-treesitter.git", name = "treesitter", version = "main"},
-  {src = "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git", name = "treesitter-textobjects", version = "main"},
-}, {confirm = false})
+	{ src = "git@github.com:nvim-treesitter/nvim-treesitter.git", name = "treesitter", version = "main" },
+	{
+		src = "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
+		name = "treesitter-textobjects",
+		version = "main",
+	},
+}, { confirm = false })
 
 require("nvim-treesitter").setup({
-  auto_install = true,
+	auto_install = true,
 })
 require("nvim-treesitter").install({
-  "bash",
-  "c",
-  "css",
-  "gitcommit",
-  "gitignore",
-  "html",
-  "javascript",
-  "jsdoc",
-  "json",
+	"bash",
+	"c",
+	"css",
+	"gitcommit",
+	"gitignore",
+	"html",
+	"javascript",
+	"jsdoc",
+	"json",
 	"jsonc",
 	"lua",
 	"luadoc",

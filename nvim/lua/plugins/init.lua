@@ -6,5 +6,3 @@ require("plugins.whichkey")
 require("plugins.treesitter")
 require("plugins.blink")
 -- formatter
-
-
