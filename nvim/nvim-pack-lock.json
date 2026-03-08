@@ -9,6 +9,10 @@
       "rev": "40dcec5555f960b0a04340d76eabdf4efe78599d",
       "src": "git@github.com:stevearc/conform.nvim"
     },
+    "diagflow.nvim": {
+      "rev": "b13321b517ff64bf42eeac2214085d3c76d83a0d",
+      "src": "git@github.com:dgagn/diagflow.nvim"
+    },
     "everforest": {
       "rev": "557bce922401e247a596583679bc181d4d688554",
       "src": "git@github.com:neanias/everforest-nvim"
