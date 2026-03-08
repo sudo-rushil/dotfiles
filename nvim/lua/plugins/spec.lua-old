@@ -1,8 +1,5 @@
 return {
 
-	-- kickstart.nvim inspired:
-	-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L188
-
 	"tpope/vim-sleuth",
 
 	{
