@@ -1,9 +1,9 @@
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 -- Buffer navigation
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Switch to last buffer" })
 
 -- Window navigation
 map("n", "<leader>h", "<C-w><C-h>", { desc = "Go to left window", remap = true })
@@ -51,4 +51,4 @@ map("i", ";", ";<C-g>u")
 -- Save and quit
 map({ "i", "x", "n", "s" }, "<leader>ww", "<cmd>w<CR><Esc>", { desc = "Save file" })
 map("n", "<leader>qa", "<cmd>qa<CR>", { desc = "Quit all" })
-map("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Save and quit" })
+map("n", "<leader>qq", "<cmd>wq<CR>", { desc = "Save and quit" })
