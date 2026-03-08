@@ -2,11 +2,12 @@ local augroup = function(name)
 	return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
 end
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+-- Check if files changed outside Neovim and reload when safe
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufEnter", "CursorHold", "CursorHoldI" }, {
 	group = augroup("checktime"),
 	callback = function()
-		if vim.o.buftype ~= "nofile" then
+		-- Avoid running while typing commands in command-line mode
+		if vim.fn.mode() ~= "c" then
 			vim.cmd("checktime")
 		end
 	end,
