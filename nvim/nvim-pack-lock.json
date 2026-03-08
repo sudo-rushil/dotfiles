@@ -21,6 +21,10 @@
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "git@github.com:folke/flash.nvim"
     },
+    "jj.nvim": {
+      "rev": "bbba4051c862473637e98277f284d12b050588ca",
+      "src": "git@github.com:nicolasgb/jj.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
       "src": "git@github.com:neovim/nvim-lspconfig"
