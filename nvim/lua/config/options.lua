@@ -2,11 +2,6 @@
 
 local opt = vim.opt
 
--- Global flags
-vim.g.mapleader = " " -- needs to be moved up
-vim.g.maplocalleader = " "
-vim.g.have_nerd_font = true
-
 -- Numbering
 opt.number = true -- Line numbers
 opt.relativenumber = true -- Relative line numbers

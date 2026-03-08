@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "nvim-web-devicons": {
+      "rev": "737cf6c657898d0c697311d79d361288a1343d50",
+      "src": "git@github.com:nvim-tree/nvim-web-devicons.git"
+    },
+    "oil.nvim": {
+      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "src": "git@github.com:stevearc/oil.nvim.git"
+    }
+  }
+}

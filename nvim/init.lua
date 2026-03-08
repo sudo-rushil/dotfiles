@@ -1,6 +1,12 @@
+-- Global flags
+vim.g.mapleader = " " -- needs to be moved up
+vim.g.maplocalleader = " "
+vim.g.have_nerd_font = true
+
 -- Load configuration
 require("config")
-require("opt")
+require("plugins")
+-- require("opt")
 
 -- load lazy.nvim
 -- require("config.lazy")

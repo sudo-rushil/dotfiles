@@ -17,6 +17,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
+--[[
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
@@ -25,6 +26,7 @@ require("lazy").setup({
 	install = { colorscheme = { "habamax" } },
 	checker = { enabled = true },
 })
+]]
 
 --[[
 require("rose-pine").setup({
@@ -35,10 +37,11 @@ require("rose-pine").setup({
 vim.cmd.colorscheme("rose-pine")
 ]]
 
+--[[
 require("everforest").setup({
 	background = "medium",
 })
 
 vim.cmd.colorscheme("everforest")
-
+]]
 -- vim: ts=2 sts=2 sw=2 et

@@ -14,6 +14,6 @@
 -- preview substitutions live
 
 -- vim.keymap.set("n", "<leader>sp", "<cmd>Oil<CR>", { desc = "Open parent directory" })
-vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+-- vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
 -- vim: ts=2 sts=2 sw=2 et

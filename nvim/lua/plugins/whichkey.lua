@@ -1,0 +1,2 @@
+-- which-key.nvim
+-- Adds dynamic display of what keys are bound to what
