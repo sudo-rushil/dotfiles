@@ -76,3 +76,6 @@ map("v", "<leader>y", function()
 	vim.fn.setreg("+", result)
 	vim.notify("Copied: " .. filename .. ":" .. line_ref, vim.log.levels.INFO)
 end, { desc = "Yank selection with context" })
+
+-- Update plugins
+map("n", "<leader>pu", "<cmd>lua vim.pack.update()<CR>", {desc = "Update plugins" })
