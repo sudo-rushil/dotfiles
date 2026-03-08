@@ -5,6 +5,10 @@
       "src": "git@github.com:saghen/blink.cmp",
       "version": "1.9.0 - 2.0.0"
     },
+    "conform.nvim": {
+      "rev": "40dcec5555f960b0a04340d76eabdf4efe78599d",
+      "src": "git@github.com:stevearc/conform.nvim"
+    },
     "everforest": {
       "rev": "557bce922401e247a596583679bc181d4d688554",
       "src": "git@github.com:neanias/everforest-nvim"
