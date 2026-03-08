@@ -17,8 +17,6 @@ require("mini.ai").setup({ n_lines = 500 })
 -- - sr)'  - [S]urround [R]eplace [)] [']
 require("mini.surround").setup()
 
-require("mini.indentscope").setup()
-
 require("mini.diff").setup()
 
 require("mini.pairs").setup({

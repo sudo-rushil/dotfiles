@@ -73,14 +73,3 @@ vim.lsp.enable({
 	"tailwindcss",
 	"ts_ls",
 })
-
-vim.pack.add({
-	{ src = "git@github.com:folke/lazydev.nvim", name = "lazydev.nvim" },
-	{ src = "git@github.com:Bilal2453/luvit-meta", name = "luvit-meta" },
-}, { confirm = false })
-
-require("lazydev").setup({
-	library = {
-		{ path = "luvit-meta/library", words = { "vim%.uv" } },
-	},
-})

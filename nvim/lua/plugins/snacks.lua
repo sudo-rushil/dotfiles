@@ -10,7 +10,7 @@ snacks.setup({
 	bigfile = { enabled = true },
 	dashboard = { enabled = false },
 	dim = { enabled = true },
-	explorer = { enabled = true },
+	explorer = { enabled = false },
 	image = { enabled = true },
 	indent = { enabled = true },
 	input = { enabled = true },
