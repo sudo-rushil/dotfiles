@@ -1,6 +1,4 @@
 return {
-	-- colorscheme
-	{ "neanias/everforest-nvim", name = "everforest", lazy = false, priority = 1000 },
 
 	-- kickstart.nvim inspired:
 	-- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L188

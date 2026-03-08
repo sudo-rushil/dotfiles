@@ -1,6 +1,8 @@
 vim.pack.add({
-	{ src = "git@github.com:stevearc/oil.nvim.git" },
-	{ src = "git@github.com:nvim-tree/nvim-web-devicons.git" },
-})
+	{ src = "git@github.com:stevearc/oil.nvim.git" , name = "oil.nvim"},
+	{ src = "git@github.com:nvim-tree/nvim-web-devicons.git" , name = "nvim-web-devicons"},
+}, { confirm = false})
 
-vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+local oil = require("oil")
+oil.setup({})
+vim.keymap.set("n", "-", function() oil.open() end, { desc = "Open parent directory" })

@@ -1,2 +1,4 @@
+require("plugins.theme")
 require("plugins.oil")
-require("plugins.nvim-lspconfig")
+require("plugins.lspconfig")
+

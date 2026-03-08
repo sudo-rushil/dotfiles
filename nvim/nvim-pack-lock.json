@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "everforest": {
+      "rev": "557bce922401e247a596583679bc181d4d688554",
+      "src": "git@github.com:neanias/everforest-nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
+      "src": "git@github.com:neovim/nvim-lspconfig"
+    },
     "nvim-web-devicons": {
       "rev": "737cf6c657898d0c697311d79d361288a1343d50",
       "src": "git@github.com:nvim-tree/nvim-web-devicons.git"

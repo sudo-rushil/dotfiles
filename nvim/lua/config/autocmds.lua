@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"help",
 		"lspinfo",
 		"notify",
+    "nvim-pack",
 		"qf",
 		"startuptime",
 		"oil",

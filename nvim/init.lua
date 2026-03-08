@@ -6,6 +6,7 @@ vim.g.have_nerd_font = true
 -- Load configuration
 require("config")
 require("plugins")
+require("config.lsp")
 -- require("opt")
 
 -- load lazy.nvim
