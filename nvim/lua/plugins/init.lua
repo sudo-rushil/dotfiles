@@ -4,6 +4,7 @@ require("plugins.oil")
 require("plugins.snacks")
 require("plugins.whichkey")
 require("plugins.treesitter")
--- blink
+require("plugins.blink")
 -- formatter
+
 

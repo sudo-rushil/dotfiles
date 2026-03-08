@@ -1,8 +1,17 @@
 {
   "plugins": {
+    "blink.cmp": {
+      "rev": "4b18c32adef2898f95cdef6192cbd5796c1a332d",
+      "src": "git@github.com:saghen/blink.cmp",
+      "version": "1.9.0 - 2.0.0"
+    },
     "everforest": {
       "rev": "557bce922401e247a596583679bc181d4d688554",
       "src": "git@github.com:neanias/everforest-nvim"
+    },
+    "fidget.nvim": {
+      "rev": "7fa433a83118a70fe24c1ce88d5f0bd3453c0970",
+      "src": "git@github.com:j-hui/fidget.nvim"
     },
     "nvim-lspconfig": {
       "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
