@@ -7,10 +7,10 @@ local palette = {
 	hint = "#A7C080",
 }
 
-vim.api.nvim_set_hl(0, "DiagnosticErrorLine", { bg = palette.err, blend = 20 })
-vim.api.nvim_set_hl(0, "DiagnosticWarnLine", { bg = palette.warn, blend = 20 })
-vim.api.nvim_set_hl(0, "DiagnosticInfoLine", { bg = palette.info, blend = 20 })
-vim.api.nvim_set_hl(0, "DiagnosticHintLine", { bg = palette.hint, blend = 20 })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = palette.err })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = palette.warn })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = palette.info })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = palette.hint })
 
 vim.diagnostic.config({
 	underline = true,
@@ -19,12 +19,6 @@ vim.diagnostic.config({
 	float = {
 		border = "rounded",
 		source = true,
-	},
-	linehl = {
-		[vim.diagnostic.severity.ERROR] = "DiagnosticErrorLine",
-		[vim.diagnostic.severity.WARN] = "DiagnosticWarnLine",
-		[vim.diagnostic.severity.INFO] = "DiagnosticInfoLine",
-		[vim.diagnostic.severity.HINT] = "DiagnosticHintLine",
 	},
 })
 
@@ -40,5 +34,5 @@ map("n", "]d", diagnostic_goto(true), { desc = "Next diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next error" })
 map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev error" })
-map("n", "]e", diagnostic_goto(true, "WARN"), { desc = "Next warn" })
-map("n", "[e", diagnostic_goto(false, "WARN"), { desc = "Prev warn" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next warn" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev warn" })
