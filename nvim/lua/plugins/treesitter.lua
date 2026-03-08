@@ -7,6 +7,10 @@ vim.pack.add({
 	},
 }, { confirm = false })
 
+local augroup = function(name)
+	return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
+end
+
 require("nvim-treesitter").setup({
 	auto_install = true,
 })
@@ -91,34 +95,41 @@ for _, map in ipairs({
 	end, { desc = "Move to " .. qstr })
 end
 
--- Update treesitter on package update
+-- Update treesitter parser/query files only when treesitter itself changes
 vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Handle nvim-treesitter updates",
-	group = vim.api.nvim_create_augroup("user_nvim_treesitter_pack_changed_update_handler", { clear = true }),
+	group = augroup("treesitter_pack_changed"),
 	callback = function(event)
-		if event.data.kind == "update" then
-			local ok = pcall(vim.cmd, "TSUpdate")
-			if ok then
-				vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
-			else
-				vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.WARN)
-			end
+		local kind = event.data and event.data.kind
+		local name = event.data and event.data.spec and event.data.spec.name
+		if kind ~= "install" and kind ~= "update" then
+			return
+		end
+		if name ~= "treesitter" then
+			return
+		end
+
+		if not event.data.active then
+			vim.cmd.packadd("treesitter")
+		end
+
+		local ok = pcall(vim.cmd, "TSUpdate")
+		if ok then
+			vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
+		else
+			vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.WARN)
 		end
 	end,
 })
 
 -- Start treesitter
 vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("treesitter_start"),
 	pattern = { "*" },
 	callback = function()
-		local filetype = vim.bo.filetype
-		if filetype and filetype ~= "" then
-			local success = pcall(function()
-				vim.treesitter.start()
-			end)
-			if not success then
-				return
-			end
+		if vim.bo.filetype == "" then
+			return
 		end
+		pcall(vim.treesitter.start)
 	end,
 })
