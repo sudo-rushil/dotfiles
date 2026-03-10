@@ -65,4 +65,8 @@ opt.clipboard = "unnamedplus" -- Use system clipboard
 opt.linebreak = true -- Wrap lines on linebreaks
 opt.list = true -- Show some invisible characters (currently tabs, trailing spaces, and nbsp)
 
+-- Splits
+opt.splitbelow = true
+opt.splitright = true
+
 -- vim: ts=2 sts=2 sw=2 et
