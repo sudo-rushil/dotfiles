@@ -12,7 +12,7 @@ require("codediff").setup({
 			prev_file = "[f",
 		},
 	},
-}) -- TODO(is this necessary?)
+})
 
 local jj = require("jj")
 jj.setup({
@@ -57,7 +57,7 @@ map("n", prefix .. "bc", cmd.bookmark_create, { desc = "JJ bookmark create" })
 map("n", prefix .. "bt", cmd.bookmark_track, { desc = "JJ bookmark track" })
 map("n", prefix .. "bm", cmd.bookmark_move, { desc = "JJ bookmark move" })
 map("n", prefix .. "ba", function()
-	cmd.j({ "bookmark", "advance", "--to", "@-" })
+	cmd.j("tug")
 	cmd.log({})
 end, { desc = "JJ bookmark advance" })
 map("n", prefix .. "bd", cmd.bookmark_delete, { desc = "JJ bookmark delete" })
