@@ -5,6 +5,10 @@
       "src": "git@github.com:saghen/blink.cmp",
       "version": "1.9.0 - 2.0.0"
     },
+    "codediff.nvim": {
+      "rev": "d21a9a3ec5b46c92b38f4ad2e950b76b152151d5",
+      "src": "git@github.com:esmuellert/codediff.nvim"
+    },
     "conform.nvim": {
       "rev": "40dcec5555f960b0a04340d76eabdf4efe78599d",
       "src": "git@github.com:stevearc/conform.nvim"

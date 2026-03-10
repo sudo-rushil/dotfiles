@@ -158,13 +158,13 @@ local keymaps = {
 		desc = "File explorer",
 	},
 	-- Git
-	{
-		"<leader>ts",
-		function()
-			snacks.picker.git_status()
-		end,
-		desc = "Git status",
-	},
+	-- {
+	-- 	"<leader>ts",
+	-- 	function()
+	-- 		snacks.picker.git_status()
+	-- 	end,
+	-- 	desc = "Git status",
+	-- },
 	-- LSP
 	{
 		"<leader>gd",

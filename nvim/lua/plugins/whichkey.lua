@@ -11,7 +11,6 @@ wk.add({
 	{ "<leader>r", group = "rename" },
 	{ "<leader>s", group = "search" },
 	{ "<leader>w", group = "windows" },
-	{ "<leader>w", group = "windows" },
 	{ "<leader>q", group = "quit" },
 	{ "g", group = "goto" },
 	{ "[", group = "prev" },
