@@ -32,8 +32,8 @@ map({ "i", "n" }, "<Esc>", "<cmd>nohlsearch<CR><Esc>")
 -- Smart search navigation (n always goes forward, N always goes backward)
 map("n", "n", "'Nn'[v:searchforward].'zv'", { desc = "Next search result", expr = true })
 map({ "o", "x" }, "n", "'Nn'[v:searchforward]", { desc = "Next search result", expr = true })
-map("n", "N", "'Nn'[v:searchforward].'zv'", { desc = "Prev search result", expr = true })
-map({ "o", "x" }, "N", "'Nn'[v:searchforward]", { desc = "Prev search result", expr = true })
+map("n", "N", "'nN'[v:searchforward].'zv'", { desc = "Prev search result", expr = true })
+map({ "o", "x" }, "N", "'nN'[v:searchforward]", { desc = "Prev search result", expr = true })
 
 -- Smart undo points
 map("i", ",", ",<C-g>u")
