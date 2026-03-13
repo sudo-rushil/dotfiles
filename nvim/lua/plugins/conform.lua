@@ -13,6 +13,8 @@ require("conform").setup({
 		toml = { "taplo" },
 		typescript = { "biome-check" },
 		typescriptreact = { "biome-check" },
+		zig = { "zigfmt" },
+		zon = { "zigfmt" },
 	},
 	formatters = {
 		["biome-check"] = { require_cwd = true },
