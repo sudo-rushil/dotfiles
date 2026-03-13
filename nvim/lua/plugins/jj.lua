@@ -30,7 +30,9 @@ local cmd = require("jj.cmd")
 local map = vim.keymap.set
 local prefix = "<leader>;"
 
-map("n", prefix .. "j", cmd.log, { desc = "JJ" })
+map("n", prefix .. "j", function()
+	cmd.log({ revisions = "history(20)" })
+end, { desc = "JJ" })
 map("n", prefix .. "u", cmd.undo, { desc = "JJ undo" })
 map("n", prefix .. "d", cmd.describe, { desc = "JJ describe" })
 map("n", prefix .. "n", function()
@@ -47,7 +49,7 @@ map("n", prefix .. "n", function()
 		end
 
 		local msg = "New change: `" .. desc:gsub("'", [['"'"']]) .. "`"
-		cmd.new({ args = "--message '" .. desc("'") })
+		cmd.new({ args = "--message '" .. desc .. "'" })
 		vim.notify(msg, vim.log.levels.INFO, { title = "Jujutsu" })
 	end)
 end, { desc = "JJ new (prompt for description)" })
