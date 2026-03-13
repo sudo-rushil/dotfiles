@@ -72,4 +72,5 @@ vim.lsp.enable({
 	"stylua",
 	"tailwindcss",
 	"ts_ls",
+	"zls",
 })
