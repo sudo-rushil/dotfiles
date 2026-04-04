@@ -45,7 +45,7 @@ zstyle :prompt:pure:continuation magenta
 
 # magic enter
 zstyle :zshzoo:magic-enter command 'l .'
-zstyle :zshzoo:magic-enter git-command 'git status -sb .'
+zstyle :zshzoo:magic-enter git-command 'jj'
 
 # GPG
 unset SSH_AGENT_PID

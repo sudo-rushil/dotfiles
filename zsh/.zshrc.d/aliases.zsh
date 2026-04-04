@@ -14,3 +14,6 @@ alias nf='nvim $(fzf)'
 alias bp='bun pipeline'
 alias bs='bun agent-tauri start'
 alias bd='bun dev'
+
+# hehe
+alias misato='source ~/.local/bin/misato'
