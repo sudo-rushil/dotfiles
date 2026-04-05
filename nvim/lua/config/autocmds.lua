@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave", "BufEnter
 	group = augroup("checktime"),
 	callback = function()
 		-- Avoid running while typing commands in command-line mode
-		if vim.fn.mode() ~= "c" then
+		if vim.fn.mode() ~= "c" and vim.fn.getcmdwintype() == "" then
 			vim.cmd("checktime")
 		end
 	end,
