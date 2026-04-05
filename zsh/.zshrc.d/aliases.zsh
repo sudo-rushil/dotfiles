@@ -12,7 +12,7 @@ alias nf='nvim $(fzf)'
 
 # bun
 alias bp='bun pipeline'
-alias bs='bun agent-tauri start'
+alias bs='bun tauri:dev'
 alias bd='bun dev'
 
 # hehe
