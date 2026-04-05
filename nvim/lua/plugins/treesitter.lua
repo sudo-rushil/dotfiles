@@ -34,6 +34,7 @@ require("nvim-treesitter").install({
 	"regex",
 	"rust",
 	"sql",
+	"svelte",
 	"toml",
 	"tsx",
 	"typescript",
