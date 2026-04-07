@@ -10,6 +10,7 @@ require("conform").setup({
 		json = { "biome-check" },
 		lua = { "stylua" },
 		rust = { "rustfmt" },
+		svelte = { "biome-check" },
 		toml = { "taplo" },
 		typescript = { "biome-check" },
 		typescriptreact = { "biome-check" },
