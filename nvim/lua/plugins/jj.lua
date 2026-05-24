@@ -55,6 +55,7 @@ map("n", prefix .. "n", function()
 end, { desc = "JJ new (prompt for description)" })
 
 map("n", prefix .. "q", cmd.squash, { desc = "JJ squash" })
+map("n", prefix .. "l", cmd.split, { desc = "JJ split" })
 map("n", prefix .. "bc", cmd.bookmark_create, { desc = "JJ bookmark create" })
 map("n", prefix .. "bt", cmd.bookmark_track, { desc = "JJ bookmark track" })
 map("n", prefix .. "bm", cmd.bookmark_move, { desc = "JJ bookmark move" })

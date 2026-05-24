@@ -3,12 +3,14 @@ vim.pack.add({
 }, { confirm = false })
 
 require("conform").setup({
+	notify_no_formatters = false,
 	formatters_by_ft = {
 		c = { "clang-format" },
 		javascript = { "biome-check" },
 		javascriptreact = { "biome-check" },
 		json = { "biome-check" },
 		lua = { "stylua" },
+		markdown = { "hongdown" },
 		rust = { "rustfmt" },
 		svelte = { "biome-check" },
 		toml = { "taplo" },
@@ -20,6 +22,11 @@ require("conform").setup({
 	formatters = {
 		["biome-check"] = { require_cwd = true },
 		["clang-format"] = { require_cwd = true },
+		["hongdown"] = {
+			command = "hongdown",
+			args = { "--stdin" },
+			stdin = true,
+		},
 	},
 	default_format_opts = {
 		lsp_format = "fallback",
