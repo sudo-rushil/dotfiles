@@ -10,7 +10,7 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>Treewalker Down<CR>", { silent = tru
 vim.keymap.set({ "n", "v" }, "<C-h>", "<cmd>Treewalker Left<CR>", { silent = true, desc = "Jump to ancestor" })
 vim.keymap.set({ "n", "v" }, "<C-l>", "<cmd>Treewalker Right<CR>", { silent = true, desc = "Jump to child" })
 
-vim.keymap.set("n", "<C-S-k>", "<cmd>Treewalker SwapUp<CR>", { silent = true })
-vim.keymap.set("n", "<C-S-j>", "<cmd>Treewalker SwapDown<CR>", { silent = true })
--- vim.keymap.set("n", "<C-S-h>", "<cmd>Treewalker SwapLeft<CR>", { silent = true })
--- vim.keymap.set("n", "<C-S-l>", "<cmd>Treewalker SwapRight<CR>", { silent = true })
+vim.keymap.set("n", "<leader>tk", "<cmd>Treewalker SwapUp<CR>", { silent = true })
+vim.keymap.set("n", "<leader>tj", "<cmd>Treewalker SwapDown<CR>", { silent = true })
+vim.keymap.set("n", "<leader>th", "<cmd>Treewalker SwapLeft<CR>", { silent = true })
+vim.keymap.set("n", "<leader>tl", "<cmd>Treewalker SwapRight<CR>", { silent = true })

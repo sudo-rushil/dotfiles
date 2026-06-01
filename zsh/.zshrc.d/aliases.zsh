@@ -9,6 +9,7 @@ alias lj='lazyjj'
 
 # neovim
 alias nf='nvim $(fzf)'
+alias nv='nvim'
 
 # bun
 alias bp='bun pipeline'

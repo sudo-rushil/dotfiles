@@ -70,6 +70,7 @@ vim.lsp.enable({
 	"css_variables",
 	"lua_ls",
 	"rust_analyzer",
+	"sourcekit",
 	"stylua",
 	"svelte",
 	"tailwindcss",

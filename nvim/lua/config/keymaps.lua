@@ -81,3 +81,133 @@ end, { desc = "Yank selection with context" })
 
 -- Update plugins
 map("n", "<leader>pu", "<cmd>lua vim.pack.update()<CR>", { desc = "Update plugins" })
+
+-- Experimental function to add class attributes to nearest node
+local function child_of_type(node, node_type)
+	for child in node:iter_children() do
+		if child:type() == node_type then
+			return child
+		end
+	end
+end
+
+local function node_text(bufnr, node)
+	return vim.treesitter.get_node_text(node, bufnr)
+end
+
+local function split_classes(input)
+	local classes = {}
+	for class in vim.trim(input):gmatch("%S+") do
+		table.insert(classes, class)
+	end
+	return classes
+end
+
+local function find_nearest_div(bufnr)
+	pcall(vim.treesitter.start, bufnr)
+	local parser_ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+	if parser_ok and parser then
+		pcall(parser.parse, parser)
+	end
+
+	local ok, node = pcall(vim.treesitter.get_node)
+	if not ok then
+		return nil, nil
+	end
+
+	while node do
+		if node:type() == "element" then
+			local start_tag = child_of_type(node, "start_tag")
+			local tag_name = start_tag and child_of_type(start_tag, "tag_name")
+			if tag_name and node_text(bufnr, tag_name) == "div" then
+				return node, start_tag
+			end
+		end
+		node = node:parent()
+	end
+
+	return nil, nil
+end
+
+local function find_class_attribute(bufnr, start_tag)
+	for child in start_tag:iter_children() do
+		if child:type() == "attribute" then
+			local name = child_of_type(child, "attribute_name")
+			if name and node_text(bufnr, name) == "class" then
+				return child
+			end
+		end
+	end
+end
+
+local function quoted_attribute_value(attribute)
+	return child_of_type(attribute, "quoted_attribute_value")
+end
+
+local function add_class_to_nearest_div(input)
+	local bufnr = vim.api.nvim_get_current_buf()
+	local classes = split_classes(input)
+	if #classes == 0 then
+		return
+	end
+
+	local _, start_tag = find_nearest_div(bufnr)
+	if not start_tag then
+		vim.notify("No containing div found", vim.log.levels.WARN)
+		return
+	end
+
+	local class_attr = find_class_attribute(bufnr, start_tag)
+	if not class_attr then
+		local end_row, end_col = select(3, start_tag:range())
+		vim.api.nvim_buf_set_text(bufnr, end_row, end_col - 1, end_row, end_col - 1, {
+			' class="' .. table.concat(classes, " ") .. '"',
+		})
+		return
+	end
+
+	local quoted_value = quoted_attribute_value(class_attr)
+	if not quoted_value then
+		local _, _, end_row, end_col = class_attr:range()
+		vim.api.nvim_buf_set_text(bufnr, end_row, end_col, end_row, end_col, {
+			'="' .. table.concat(classes, " ") .. '"',
+		})
+		return
+	end
+
+	local value_text = node_text(bufnr, quoted_value)
+	local existing = value_text:sub(2, -2)
+	local seen = {}
+	for class in existing:gmatch("%S+") do
+		seen[class] = true
+	end
+
+	local new_classes = {}
+	for _, class in ipairs(classes) do
+		if not seen[class] then
+			table.insert(new_classes, class)
+		end
+	end
+
+	if #new_classes == 0 then
+		return
+	end
+
+	local end_row, end_col = select(3, quoted_value:range())
+	local prefix = existing:match("%S") and " " or ""
+	vim.api.nvim_buf_set_text(bufnr, end_row, end_col - 1, end_row, end_col - 1, {
+		prefix .. table.concat(new_classes, " "),
+	})
+end
+
+vim.api.nvim_create_user_command("HtmlAddClass", function(opts)
+	add_class_to_nearest_div(opts.args)
+end, { nargs = "+", desc = "Add class to nearest containing div" })
+
+map("n", "<leader>cc", function()
+	vim.ui.input({ prompt = "Class(es) for nearest div: " }, function(input)
+		if input then
+			add_class_to_nearest_div(input)
+		end
+	end)
+end, { desc = "Add class to nearest div" })
