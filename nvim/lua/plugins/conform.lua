@@ -6,6 +6,8 @@ require("conform").setup({
 	notify_no_formatters = false,
 	formatters_by_ft = {
 		c = { "clang-format" },
+		css = { "biome-check" },
+		html = { "biome-check" },
 		javascript = { "biome-check" },
 		javascriptreact = { "biome-check" },
 		json = { "biome-check" },

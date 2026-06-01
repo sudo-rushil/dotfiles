@@ -45,6 +45,10 @@
       "rev": "cad365c212fb1e332cb93fa8f72697125799d00a",
       "src": "git@github.com:echasnovski/mini.nvim"
     },
+    "nvim-highlight-colors": {
+      "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
+      "src": "git@github.com:brenoprata10/nvim-highlight-colors"
+    },
     "nvim-lspconfig": {
       "rev": "2163c54bb6cfec53e3e555665ada945b8c8331b9",
       "src": "git@github.com:neovim/nvim-lspconfig"
@@ -56,6 +60,10 @@
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "git@github.com:stevearc/oil.nvim.git"
+    },
+    "oklch-color-picker.nvim": {
+      "rev": "9b5db80d5f6af8fbc31bad29f69ad76f63154944",
+      "src": "git@github.com:eero-lehtinen/oklch-color-picker.nvim"
     },
     "snacks.nvim": {
       "rev": "9912042fc8bca2209105526ac7534e9a0c2071b2",

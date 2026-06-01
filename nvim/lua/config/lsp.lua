@@ -67,6 +67,7 @@ vim.lsp.config("*", {
 vim.lsp.enable({
 	"biome",
 	"clangd",
+	"css_variables",
 	"lua_ls",
 	"rust_analyzer",
 	"stylua",
