@@ -79,6 +79,11 @@
       "src": "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
       "version": "'main'"
     },
+    "treewalker.nvim": {
+      "rev": "0b081bf6c6875cf3e478b633796a9e2b64b730e8",
+      "src": "git@github.com:aaronik/treewalker.nvim.git",
+      "version": "'main'"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "git@github.com:folke/which-key.nvim"
