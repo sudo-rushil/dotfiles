@@ -42,6 +42,19 @@ autoload -Uz promptinit && promptinit && prompt pure
 PURE_PROMPT_SYMBOL="-"
 zstyle :prompt:pure:success white
 zstyle :prompt:pure:continuation magenta
+zstyle :prompt:pure:path:separator dim yes
+zstyle :prompt:pure:git show no
+
+my_jj_state=
+my_precmd() {
+  my_jj_state=$(jj log -r@ --no-graph --no-pager -T 'separate(" ", change_id.shortest(),          
+  bookmarks.join(", "), if(conflict, "x"), if(empty, "", "*"), surround("\"", "\"", description.first_line()))')
+}
+add-zsh-hook precmd my_precmd
+
+prompt_pure_precustom() {
+  psvar[23]="$my_jj_state"
+}
 
 # magic enter
 zstyle :zshzoo:magic-enter command 'l .'
@@ -53,28 +66,9 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
-# Clojure support
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export JAVA_HOME="/opt/homebrew/Cellar/openjdk/24.0.1"
-
-# Emacs support
-export PATH="$HOME/.emacs.d/bin:$PATH"
-export DOOMDIR="$HOME/.dotfiles/doom"
-
 # LLVM support
 export PATH="$(brew --prefix)/opt/llvm/bin:$PATH"
 export PATH="$PATH:$(brew --prefix)/opt/riscv-gnu-toolchain/bin"
-
-# Postgres support
-export PATH="$PATH:$(brew --prefix)/opt/postgresql@17/bin"
-
-# pnpm
-export PNPM_HOME="/Users/rushilma/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # Zig
 export PATH="/Users/rushilma/.zig:$PATH"
