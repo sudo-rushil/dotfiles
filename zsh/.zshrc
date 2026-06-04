@@ -44,16 +44,10 @@ zstyle :prompt:pure:success white
 zstyle :prompt:pure:continuation magenta
 zstyle :prompt:pure:path:separator dim yes
 zstyle :prompt:pure:git show no
-
-my_jj_state=
-my_precmd() {
-  my_jj_state=$(jj log -r@ --no-graph --no-pager -T 'separate(" ", change_id.shortest(),          
-  bookmarks.join(", "), if(conflict, "x"), if(empty, "", "*"), surround("\"", "\"", description.first_line()))')
-}
-add-zsh-hook precmd my_precmd
+# zstyle :prompt:pure:custom:suffix color none
 
 prompt_pure_precustom() {
-  psvar[23]="$my_jj_state"
+  psvar[23]=$(jj log -r@ --no-graph --no-pager -T 'separate(" ", change_id.shortest(), bookmarks.join(", "), if(conflict, "x"), if(empty, "", "*"), surround("\"", "\"", description.first_line()))')
 }
 
 # magic enter
