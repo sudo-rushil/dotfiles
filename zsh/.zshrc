@@ -70,6 +70,10 @@ export PATH="/Users/rushilma/.zig:$PATH"
 # Keys
 source $ZDOTDIR/.env
 
-# bun completions
+# Bun completions
 [ -s "/Users/rushilma/.bun/_bun" ] && source "/Users/rushilma/.bun/_bun"
 export PATH="/Users/rushilma/.bun/bin:$PATH"
+
+# Terraform completions
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/rushilma/.local/share/mise/installs/terraform/latest/terraform terraform
