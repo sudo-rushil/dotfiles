@@ -47,7 +47,7 @@ zstyle :prompt:pure:git show no
 # zstyle :prompt:pure:custom:suffix color none
 
 prompt_pure_precustom() {
-  psvar[23]=$(jj log -r@ --no-graph --no-pager -T 'separate(" ", change_id.shortest(), bookmarks.join(", "), if(conflict, "x"), if(empty, "", "*"), surround("\"", "\"", description.first_line()))')
+  psvar[23]=$(jj log -r@ --no-graph --no-pager -T 'separate(" ", change_id.shortest(), bookmarks.join(", "), if(conflict, "x"), if(empty, "", "*"), surround("\"", "\"", description.first_line()))' 2>/dev/null || echo "")
 }
 
 # magic enter

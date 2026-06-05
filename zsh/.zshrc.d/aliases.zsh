@@ -18,3 +18,7 @@ alias bd='bun dev'
 
 # hehe
 alias misato='source ~/.local/bin/misato'
+
+# just
+alias jc="just check"
+alias jd="just dev"
