@@ -15,6 +15,7 @@ require("conform").setup({
 		markdown = { "hongdown" },
 		rust = { "rustfmt" },
 		svelte = { "biome-check" },
+		terraform = { "terraform_fmt" },
 		toml = { "taplo" },
 		typescript = { "biome-check" },
 		typescriptreact = { "biome-check" },

@@ -74,6 +74,7 @@ vim.lsp.enable({
 	"stylua",
 	"svelte",
 	"tailwindcss",
+	"terraform_ls",
 	"ts_ls",
 	"zls",
 })
